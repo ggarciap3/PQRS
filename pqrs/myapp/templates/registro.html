@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <h1 class="mb-4">Tipos de Registro</h1>
+    <div class="row">
+        <div class="col-md-6 my-3">
+            <div class="card text-center">
+                <img src="{% static 'img/5.jpg' %}" class="card-img-top mx-auto" alt="Quejas Image" style="max-width: 50%;">
+                <div class="card-body">
+                    <h2 class="card-title">Quejas</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <!-- Agrega aquí los campos del formulario para las quejas -->
+                        <button type="submit" class="btn btn-primary">Enviar Queja</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 my-3">
+            <div class="card text-center">
+                <img src="{% static 'img/5.jpg' %}" class="card-img-top mx-auto" alt="Reclamos Image" style="max-width: 50%;">
+                <div class="card-body">
+                    <h2 class="card-title">Reclamos</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <!-- Agrega aquí los campos del formulario para los reclamos -->
+                        <button type="submit" class="btn btn-primary">Enviar Reclamo</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6 my-3">
+            <div class="card text-center">
+                <img src="{% static 'img/5.jpg' %}" class="card-img-top mx-auto" alt="Sugerencias Image" style="max-width: 50%;">
+                <div class="card-body">
+                    <h2 class="card-title">Sugerencias</h2>
+                    <form action="{% url 'sugerencia_create' %}" method="post">
+                        {% csrf_token %}
+                        <!-- Agrega aquí los campos del formulario para las sugerencias -->
+                        <button type="submit" class="btn btn-primary">Enviar Sugerencia</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 my-3">
+            <div class="card text-center">
+                <img src="{% static 'img/5.jpg' %}" class="card-img-top mx-auto" alt="Peticiones Image" style="max-width: 50%;">
+                <div class="card-body">
+                    <h2 class="card-title">Peticiones</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <!-- Agrega aquí los campos del formulario para las peticiones -->
+                        <button type="submit" class="btn btn-primary">Enviar Petición</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

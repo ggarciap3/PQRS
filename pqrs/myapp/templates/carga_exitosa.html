@@ -1,0 +1,23 @@
+<!-- En tu archivo carga_exitosa.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga Exitosa</title>
+</head>
+<body>
+    <h1>¡Carga de datos exitosa!</h1>
+    <p>Los datos se han cargado correctamente en la base de datos.</p>
+    <!-- Puedes agregar más contenido o enlaces según sea necesario -->
+    <!-- myapp/templates/carga_exitosa.html -->
+<h1>Datos desde PostgreSQL</h1>
+<ul>
+    {% for usuario in datos_postgres %}
+        <li>{{ usuario.nombre }} - {{ usuario.cedula }} - {{ usuario.area }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

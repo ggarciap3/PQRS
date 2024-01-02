@@ -1,0 +1,201 @@
+/* Pagina home */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Kanit:ital@1&family=Nunito+Sans:wght@300;400;600&family=Poppins:wght@300;400;500&display=swap");
+body, html {
+  min-height: 100vh;  /* Hace que el cuerpo ocupe al menos el 100% de la altura visible */
+  margin: 0;  /* Elimina el margen predeterminado del cuerpo */
+  display: flex;
+  flex-direction: column;
+}
+
+
+.footern {
+  background:linear-gradient(310deg,#15425a,#50218d);
+  margin-top: auto;
+}
+
+.titulo {
+  font-family: "Poppins", sans-serif;
+  text-shadow: 3px 2px 4px rgb(156, 156, 156);
+  color: rgb(57, 9, 87)
+}
+
+.container-nav{
+  height: 100vh;
+  width: 100%;
+  background: url(../img/maxresdefault.jpg);
+  background-size: cover;
+}
+
+
+.presentacion {
+  max-width: 1100px;
+  height: 100vh;
+  margin: auto;
+  margin-top: -100px;
+  color:  #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.presentacion .bienvenida {
+  font-size: 50px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.presentacion_h2 {
+  display: block;
+  font-size: 70px;
+  font-weight: bold;
+}
+
+
+
+/* Pagina Tipospqes */
+
+.ajustarimg {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+/* Efecto de imagenes */
+.special-img span{
+  top: 20px;
+  right: 20px;
+}
+
+.special-img img{
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.special-img:hover img{
+  -webkit-transform: scale(1.2);
+      -ms-transform: scale(1.2);
+          transform: scale(1.2);
+}
+/* Pagina Tipospqes */
+  /* pagina del admin */
+
+  .second-text {
+    color: #ffffff;
+  }
+
+  
+  #wrapper {
+    overflow-x: hidden;
+    background-color: #e6e6e6;
+  }
+  
+  #menu-iz {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin 0.25s ease-out;
+    -moz-transition: margin 0.25s ease-out;
+    -o-transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out;
+    background-color: #138db5;
+    /* box-shadow: 0 0 35px 0 rgba(49, 57, 66, 0.5); */
+  
+  }
+  .color-1{
+    background-color: #138db5;
+  }
+  /* 0fb294 */
+  #menu-iz  .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+  }
+  
+  #menu-iz .list-group {
+    width: 15rem;
+  }
+
+
+  
+  #page-content-wrapper {
+    min-width: 100vw;
+  }
+  
+  #wrapper.toggled #menu-iz {
+    margin-left: 0;
+  }
+  
+  #menu-toggle {
+    cursor: pointer;
+  }
+  
+  .menu-s {
+    background-color: #ffffff;
+  }
+
+  .second-text:hover {
+    border-left: 3px solid #bdbdbd;
+  }
+  
+  .list-group-item {
+    border:0px;
+    padding: 20px 30px;
+  }
+
+  .list-group-item:hover {
+    color: #bdbdbd;
+  }
+  
+  
+ 
+
+ 
+  
+  @media (min-width: 768px) {
+    #menu-iz {
+      margin-left: 0;
+  }
+
+    .mt-auto {
+      left: 0 !important;
+      text-align: center;
+    }
+  
+    #page-content-wrapper {
+      min-width: 0;
+      width: 100%;
+    }
+  
+    #wrapper.toggled #menu-iz {
+      margin-left: -15rem;
+    }
+  }
+
+  @media (max-width: 494px) {
+    .separacion{
+      margin-bottom: 3%;
+    }
+  }
+
+  /* Pagina de Descripcion de la Tipospq */
+
+  .espacio-container{
+    margin-top: 5%;
+    margin-bottom: 4%;
+  }
+  .line{
+  
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+   
+
+  }
+
+  @media (min-width: 992px) {
+    .borde{
+      border-color: rgb(171, 165, 165);
+      border-right-style: dashed;
+    }
+  }

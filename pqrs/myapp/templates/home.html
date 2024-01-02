@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<!-- -------- START HEADER 5 w/ text and illustration ------- -->
+<header class="d-flex align-items-center justify-content-center min-vh-80">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 text-center text-lg-start">
+        <h1 class="mb-4">Módulo para atención de Preguntas, Quejas, Reclamos y Sugerencias</h1>
+        <p class="lead">Este espacio está diseñado para que nuestros clientes y posibles clientes tengan la facilidad de darnos a conocer su opinión respecto a nuestros producto y servicios. De esta manera podemos fortalecernos y mejorar nuestros productos y servicios para marcar la diferencia en su vida.</p>
+        <div class="buttons">
+          <a href="https://www.isotools.org/2022/01/26/que-es-pqrs-y-por-que-lo-necesita-mi-empresa/" class="btn bg-gradient-warning mt-4" role="button">Saber más</a>
+          <button type="button" class="btn text-warning shadow-none mt-4">Acerca de eso</button>
+        </div>
+      </div>
+      <div class="col-lg-8 ps-5 pe-0">
+        <div class="row mt-3">
+          <div class="col-lg-3 col-6">
+            <img class="w-100 border-radius-lg shadow mt-0 mt-lg-7" src="{{STATIC_URL}}static\img\imghome1 (2).png" alt="flower-1" loading="lazy">
+          </div>
+            <div class="col-lg-3 col-6">
+              <img class="w-100 border-radius-lg shadow" src="{{STATIC_URL}}static\img\satis1.png" alt="flower-2" loading="lazy">
+              <img class="w-100 border-radius-lg shadow mt-4" src="{{STATIC_URL}}static\img\img2.png" alt="flower-3" loading="lazy">
+            </div>
+            <div class="col-lg-3 col-6 mb-3">
+              <img class="w-100 border-radius-lg shadow mt-0 mt-lg-5" src="{{STATIC_URL}}static\img\4.jpg" alt="flower-4" loading="lazy">
+              <img class="w-100 border-radius-lg shadow mt-4" src="{{STATIC_URL}}static\img\2.jpg" alt="flower-5" loading="lazy">
+            </div>
+            <div class="col-lg-3 col-6">
+              <img class="w-100 border-radius-lg shadow mt-3" src="{{STATIC_URL}}static\img\3.png" alt="flower-6" loading="lazy">
+              <img class="w-100 border-radius-lg shadow mt-4" src="{{STATIC_URL}}static\img\8.jpg" alt="flower-7" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+{% endblock %}

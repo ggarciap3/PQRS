@@ -1,0 +1,206 @@
+[
+{
+  "model": "myapp.usuario",
+  "pk": "0829361456",
+  "fields": {
+    "nombre": "Milka espinoza",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0829367889",
+  "fields": {
+    "nombre": "iSAAC GARCIA",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0909564759",
+  "fields": {
+    "nombre": "ACOSTA ORTIZ JULIO CESAR",
+    "area": "0050 - CAMPO",
+    "departamento": "0033 - COSECHA",
+    "cargo": "APAÑE DE CAMINO",
+    "tipo_empleado": "OBREROS MILAGRO",
+    "tipo_contrato": "3 - TEMPORAL"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0918622242",
+  "fields": {
+    "nombre": "ABAD VILLAMAR EDUARDO MAX",
+    "area": "0150 - BODEGAS",
+    "departamento": "0078 - BODEGA AZUCAR",
+    "cargo": "ELECTRICISTA DE PRIMERA",
+    "tipo_empleado": "OBREROS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0922667894",
+  "fields": {
+    "nombre": "ACERO BUENANO LUIS ANGEL",
+    "area": "0090 - EQUIPOS AGRICOLAS",
+    "departamento": "0061 - TALLER",
+    "cargo": "MECANICO DE TERCERA",
+    "tipo_empleado": "OBREROS MILAGRO",
+    "tipo_contrato": "E - EMERGENTE"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0929212462",
+  "fields": {
+    "nombre": "ABARCA DEL ROSARIO JORGE DENNIS",
+    "area": "0080 - FABRICA",
+    "departamento": "0044 - ENVASADO DE AZUCAR",
+    "cargo": "AUX. MANTENIMIENTO PROGRAMADO",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0929361046",
+  "fields": {
+    "nombre": "GARCIA POVEDA GABRIEL ARON",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0941158180",
+  "fields": {
+    "nombre": "ABAD MACIAS NATAEL JOSUE",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0942473869",
+  "fields": {
+    "nombre": "ACOSTA EVIA BRYAN STEVEN",
+    "area": "0080 - FABRICA",
+    "departamento": "0044 - ENVASADO DE AZUCAR",
+    "cargo": "JORNALERO",
+    "tipo_empleado": "OBREROS MILAGRO",
+    "tipo_contrato": "E - EMERGENTE"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "0955975131",
+  "fields": {
+    "nombre": "ACOSTA LOPEZ DANIEL ISIDRO",
+    "area": "0150 - BODEGAS",
+    "departamento": "0078 - BODEGA AZUCAR",
+    "cargo": "JORNALERO",
+    "tipo_empleado": "OBREROS MILAGRO",
+    "tipo_contrato": "3 - TEMPORAL"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "1201116553",
+  "fields": {
+    "nombre": "ACOSTA BUSTOS MAXIMO RODOLFO",
+    "area": "0050 - CAMPO",
+    "departamento": "0033 - COSECHA",
+    "cargo": "APAÑADOR DE CAÑA",
+    "tipo_empleado": "OBREROS MILAGRO",
+    "tipo_contrato": "3 - TEMPORAL"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "1202477814",
+  "fields": {
+    "nombre": "ABARCA CEDENO JORGE VICENTE",
+    "area": "0050 - CAMPO",
+    "departamento": "0033 - COSECHA",
+    "cargo": "APAÑE DE CAMINO",
+    "tipo_empleado": "OBREROS MILAGRO",
+    "tipo_contrato": "1 - PERMANENTE"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "4549345855",
+  "fields": {
+    "nombre": "JOSEUE EEEEE",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "5559367855",
+  "fields": {
+    "nombre": "RAIZA NUNI",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "5559367889",
+  "fields": {
+    "nombre": "TITI TITI",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "7829367889",
+  "fields": {
+    "nombre": "MILENA AJAAA",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "8947845985",
+  "fields": {
+    "nombre": "milkaa EEEEE",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+}
+]
