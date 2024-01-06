@@ -3,8 +3,8 @@ from django.http import HttpResponse, JsonResponse,Http404
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
-from .models import Usuario,Sugerencia,Queja
-from .forms import SugerenciaForm,QuejaForm
+from .models import Usuario,Sugerencia,Queja,Peticion,Reclamo
+from .forms import SugerenciaForm,QuejaForm,PeticionForm,ReclamoForm
 from django.contrib.auth.models import User
 from django.conf import settings
 # from . import forms
@@ -71,8 +71,9 @@ def base_admin(request):
     return render(request, 'base_admin.html')  # Ajusta el nombre del template según tu estructura
 
 def registro(request):
+    form = AuthenticationForm()
     # Puedes pasar los formularios correspondientes como contexto
-    return render(request, 'registro.html')
+    return render(request, 'registro.html',{'form': form})
 
 def sugerencia_create(request):
     sugerencia = Sugerencia()
@@ -140,7 +141,6 @@ def buscar_por_cedula(request, cedula):
 
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-
 def queja_create(request):
     queja = Queja()
     if request.method == 'POST':
@@ -154,3 +154,31 @@ def queja_create(request):
         form = QuejaForm()
 
     return render(request, 'queja_create.html', {'form': form, 'queja': queja})
+
+def peticion_create(request):
+    peticion = Peticion()
+    if request.method == 'POST':
+        form = QuejaForm(request.POST)
+        if form.is_valid():
+            usuario = get_object_or_404(Usuario, cedula=request.POST.get('cedula'))
+            form.instance.usuario = usuario
+            form.save()
+            return redirect('registro')
+    else:
+        form = PeticionForm()
+
+    return render(request, 'peticion_create.html', {'form': form, 'peticion': peticion})
+
+def reclamo_create(request):
+    reclamo = Reclamo()
+    if request.method == 'POST':
+        form = QuejaForm(request.POST)
+        if form.is_valid():
+            usuario = get_object_or_404(Usuario, cedula=request.POST.get('cedula'))
+            form.instance.usuario = usuario
+            form.save()
+            return redirect('registro')
+    else:
+        form = ReclamoForm()
+
+    return render(request, 'reclamo_create.html', {'form': form, 'reclamo': reclamo})

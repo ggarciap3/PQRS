@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import home, LoginFormView, transferir_datos, buscar_por_cedula, cargar_datos, base_admin, cerrar_sesion, sugerencia_create, registro, queja_create
+from .views import home, LoginFormView, transferir_datos, buscar_por_cedula, cargar_datos, base_admin, cerrar_sesion, sugerencia_create, registro, queja_create, peticion_create, reclamo_create
+
 
 urlpatterns = [
     path('', home, name='index'),
@@ -13,6 +14,8 @@ urlpatterns = [
     path('sugerencias/create/', sugerencia_create, name='sugerencia_create'),
 
     path('quejas/create/', queja_create, name='queja_create'),
-    
+
+    path('peticiones/create/', peticion_create, name='peticion_create'),
+    path('reclamos/create/', reclamo_create, name='reclamo_create'),
 
 ]

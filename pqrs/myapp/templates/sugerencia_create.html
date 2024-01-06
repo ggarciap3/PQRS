@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% block title %}Crear Sugerencia{% endblock %}
 
@@ -78,6 +78,9 @@
                     <button type="submit" class="btn btn-primary">Enviar Sugerencia</button>
                 </fieldset>
             </form>
+        </div>
+        <div class="text-left mt-3">
+            <a href="{% url 'registro' %}" class="btn btn-secondary">Regresar</a>
         </div>
     </div>
 </div>

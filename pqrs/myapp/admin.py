@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuario, Sugerencia, Queja
+from .models import Usuario, Sugerencia, Queja, Peticion, Reclamo
 
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ['cedula', 'nombre', 'area', 'departamento', 'cargo', 'tipo_empleado', 'tipo_contrato']
@@ -34,7 +34,36 @@ class QuejaAdmin(admin.ModelAdmin):
     # Añade campos relacionados al modelo Queja en la interfaz de administración
     search_fields = ['usuario__cedula','usuario__nombre', 'usuario__area', 'descripcion']
 
+class PeticionAdmin(admin.ModelAdmin):
+    list_display = ['id','cedula','nombre', 'area', 'Pfecha', 'Presponsable', 'Pcausa', 'Pestado' ]
+
+    def cedula(self, obj):
+        return obj.usuario.cedula if obj.usuario else ""
+
+    def nombre(self, obj):
+        return obj.usuario.nombre if obj.usuario else ""
+
+    def area(self, obj):
+        return obj.usuario.area if obj.usuario else ""
+
+    search_fields = ['usuario__cedula','usuario__nombre', 'usuario__area', 'descripcion']
+
+class ReclamoAdmin(admin.ModelAdmin):
+    list_display = ['id','cedula','nombre', 'area', 'Rfecha', 'Rresponsable', 'Rcausa', 'Restado' ]
+
+    def cedula(self, obj):
+        return obj.usuario.cedula if obj.usuario else ""
+
+    def nombre(self, obj):
+        return obj.usuario.nombre if obj.usuario else ""
+
+    def area(self, obj):
+        return obj.usuario.area if obj.usuario else ""
+
+    search_fields = ['usuario__cedula','usuario__nombre', 'usuario__area', 'descripcion']
 
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Sugerencia, SugerenciaAdmin)
 admin.site.register(Queja, QuejaAdmin)
+admin.site.register(Peticion, PeticionAdmin)
+admin.site.register(Reclamo, ReclamoAdmin)

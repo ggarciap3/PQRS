@@ -26,7 +26,7 @@
                 <img src="{% static 'img/5.jpg' %}" class="card-img-top mx-auto" alt="Reclamos Image" style="max-width: 50%;">
                 <div class="card-body">
                     <h2 class="card-title">Reclamos</h2>
-                    <form action="" method="post">
+                    <form action="{% url 'reclamo_create' %}" method="post">
                         {% csrf_token %}
                         <!-- Agrega aquí los campos del formulario para los reclamos -->
                         <button type="submit" class="btn btn-primary">Enviar Reclamo</button>
@@ -56,7 +56,7 @@
                 <img src="{% static 'img/5.jpg' %}" class="card-img-top mx-auto" alt="Peticiones Image" style="max-width: 50%;">
                 <div class="card-body">
                     <h2 class="card-title">Peticiones</h2>
-                    <form action="" method="post">
+                    <form action="{% url 'peticion_create' %}" method="post">
                         {% csrf_token %}
                         <!-- Agrega aquí los campos del formulario para las peticiones -->
                         <button type="submit" class="btn btn-primary">Enviar Petición</button>

@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    {% block navbar %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(310deg,#2a0b46,#50218d);">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white fs-4 titulo" href="">PQRS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white fs-5" aria-current="page"
+                            href="/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-white fs-5" aria-current="page"
+                            href="{% url 'registro' %}">Registro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+    <footer class="footern py-5 my-9 bg-gradient-dark position-relative overflow-hidden">
+        <img src="https://appsrv1-147a1.kxcdn.com/soft-ui-design-pro-django-v1.0.4/img/shapes/waves-white.svg"
+            alt="pattern-lines" class="position-absolute start-0 top-0 w-100 opacity-6">
+        <div class="container position-relative z-index-1">
+            <div class="row">
+                <div class="col-lg-4 me-auto mb-lg-0 mb-4 text-lg-start text-center">
+                    <h6 class="text-white font-weight-bolder text-uppercase mb-lg-4 mb-3">Atención al cliente</h6>
+                    <p class="text-sm text-white opacity-8 mb-0">
+                        Copyright © <script>document.write(new Date().getFullYear())</script> Desarrollado por Wall Eat.
+                    </p>
+                </div>
+                <div class="col-lg-6 ms-auto text-lg-end text-center">
+                    <p class="mb-5 text-lg text-white font-weight-bold">
+                        Estamos comprometidos a brindarle la mejor experiencia a nuestros clientes!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    
+    <script src="{% static 'javascript/funciones.js' %}"></script>
+</body>
+
+</html>
