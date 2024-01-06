@@ -3,8 +3,8 @@ from django.http import HttpResponse, JsonResponse,Http404
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
-from .models import Usuario,Sugerencia
-from .forms import SugerenciaForm
+from .models import Usuario,Sugerencia,Queja
+from .forms import SugerenciaForm,QuejaForm
 from django.contrib.auth.models import User
 from django.conf import settings
 # from . import forms
@@ -75,6 +75,7 @@ def registro(request):
     return render(request, 'registro.html')
 
 def sugerencia_create(request):
+    sugerencia = Sugerencia()
     if request.method == 'POST':
         form = SugerenciaForm(request.POST)
         if form.is_valid():
@@ -87,7 +88,7 @@ def sugerencia_create(request):
     else:
         form = SugerenciaForm()
 
-    return render(request, 'sugerencia_create.html', {'form': form})
+    return render(request, 'sugerencia_create.html', {'form': form, 'sugerencia': sugerencia})
 
 def buscar_por_cedula(request, cedula):
     if request.method == 'GET':
@@ -138,3 +139,18 @@ def buscar_por_cedula(request, cedula):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+
+def queja_create(request):
+    queja = Queja()
+    if request.method == 'POST':
+        form = QuejaForm(request.POST)
+        if form.is_valid():
+            usuario = get_object_or_404(Usuario, cedula=request.POST.get('cedula'))
+            form.instance.usuario = usuario
+            form.save()
+            return redirect('registro')
+    else:
+        form = QuejaForm()
+
+    return render(request, 'queja_create.html', {'form': form, 'queja': queja})

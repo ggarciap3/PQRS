@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Queja{% endblock %}
+
+{% load static %} 
+{% block content %}
+
+<div class="container">
+    <div class="title text-center">
+        <h2 class="position-relative d-inline-block">Formulario de Queja</h2>
+    </div>
+    <form method="post" action="{% url 'queja_create' %}" class="mt-3" id="datosUsuarioForm">
+        {% csrf_token %}
+        <div class="row">
+            <!-- Lado Izquierdo -->
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Datos del usuario</legend>
+                    <div class="form-group">
+                        <label for="id_cedula">Cédula:</label>
+                        <input type="text" name="cedula" id="id_cedula_input" class="form-control" value="{{ cedula }}">
+                        <input type="hidden" name="usuario" value="{{ usuario_id }}">
+                    </div>
+                
+                    <!-- Información del Usuario -->
+                    <div id="info_usuario" class="form-group">
+                        <label for="nombre_usuario">Nombre:</label>
+                        <input type="text" id="nombre_usuario" class="form-control" readonly>
+                        <label for="area_usuario">Área:</label>
+                        <input type="text" id="area_usuario" class="form-control" readonly>
+                    </div>
+                    <button type="button" id="buscarBtn" class="btn btn-primary mt-3">Buscar</button>
+                </fieldset>   
+            </div>
+            <!-- Lado Derecho -->
+            <div class="col-md-6">
+                <!-- Campos para ingresar Queja -->
+                <fieldset>
+                    <legend>Ingreso de Queja</legend>
+                    <!-- Responsable -->
+                    <div class="mb-3">
+                        <label for="{{ form.Qresponsable.id_for_label }}" class="form-label">Responsable:</label>
+                        <select name="{{ form.Qresponsable.name }}" id="{{ form.Qresponsable.id_for_label }}" class="form-select" required>
+                            <option value="" {% if not form.Qresponsable.value %}selected{% endif %} disabled>Selecciona una Área</option>
+                            {% for choice in queja.RESPONSABLE_CHOICES %}
+                                <option value="{{ choice.0 }}" {% if form.Qresponsable.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Fecha -->
+                    <div class="mb-3">
+                        <label for="{{ form.Qfecha.id_for_label }}" class="form-label">Fecha:</label>
+                        <input type="date" name="{{ form.Qfecha.name }}" id="{{ form.Qfecha.id_for_label }}" class="form-control" required value="{{ form.Qfecha.value }}">
+                    </div>
+
+                    <!-- Causa -->
+                    <div class="mb-3">
+                        <label for="{{ form.Qcausa.id_for_label }}" class="form-label">Causa:</label>
+                        <select name="{{ form.Qcausa.name }}" id="{{ form.Qcausa.id_for_label }}" class="form-select" required>
+                            <option value="" {% if not form.Qestado.value %}selected{% endif %} disabled>Selecciona una causa</option>
+                            {% for choice in queja.CAUSA_CHOICES %}
+                                <option value="{{ choice.0 }}" {% if form.Qcausa.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="mb-3">
+                        <label for="{{ form.Qestado.id_for_label }}" class="form-label">Estado:</label>
+                        <select name="{{ form.Qestado.name }}" id="{{ form.Qestado.id_for_label }}" class="form-select" required>
+                            <option value="" {% if not form.Qestado.value %}selected{% endif %} disabled>Selecciona un estado</option>
+                            {% for choice in queja.ESTADO_CHOICES %}
+                                <option value="{{ choice.0 }}" {% if form.Qestado.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Agregar espacio aquí -->
+                    <div class="mb-3"></div>
+        
+                    <button type="submit" class="btn btn-primary">Enviar Queja</button>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{% static 'javascript/sugerencia_form.js' %}"></script>
+{% endblock %}

@@ -38,32 +38,37 @@
             <!-- Campos para ingresar sugerencia -->
                 <fieldset>
                     <legend>Ingreso de sugerencia</legend>
-                    <div class="form-group">
-                        <label for="id_responsable">Responsable:</label>
-                        <select name="responsable" id="id_responsable" class="form-control" required>
-                            <!-- Opciones para el campo responsable -->
-                            <option value="FARIAS">FARIAS</option>
-                            <option value="GGARCIA">GGARCIA</option>
-                            <option value="WMARUDENA">WMARUDENA</option>
-                            <option value="NANDALUZ">NANDALUZ</option>
+                    <!-- Responsable -->
+                    <div class="mb-3">
+                        <label for="{{ form.responsable.id_for_label }}" class="form-label">Responsable:</label>
+                        <select name="{{ form.responsable.name }}" id="{{ form.responsable.id_for_label }}" class="form-select" required>
+                            <option value="" {% if not form.responsable.value %}selected{% endif %} disabled>Selecciona una Área</option>
+                            {% for choice in sugerencia.RESPONSABLE_CHOICES %}
+                                <option value="{{ choice.0 }}" {% if form.responsable.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                            {% endfor %}
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="id_fecha">Fecha:</label>
-                        <input type="date" name="fecha" id="id_fecha" class="form-control" required>
+
+                    <!-- Fecha -->
+                    <div class="mb-3">
+                        <label for="{{ form.fecha.id_for_label }}" class="form-label">Fecha:</label>
+                        <input type="date" name="{{ form.fecha.name }}" id="{{ form.fecha.id_for_label }}" class="form-control" required value="{{ form.fecha.value }}">
                     </div>
-        
-                    <div class="form-group">
-                        <label for="id_descripcion">Descripción:</label>
-                        <textarea name="descripcion" id="id_descripcion" class="form-control" required></textarea>
+
+                    <!-- Descripción -->
+                    <div class="mb-3">
+                        <label for="{{ form.descripcion.id_for_label }}" class="form-label">Descripción:</label>
+                        <textarea name="{{ form.descripcion.name }}" id="{{ form.descripcion.id_for_label }}" class="form-control" required>{{ form.descripcion.value }}</textarea>
                     </div>
-        
-                    <div class="form-group">
-                        <label for="id_estado">Estado:</label>
-                        <select name="estado" id="id_estado" class="form-control" required>
-                            <!-- Opciones para el campo estado -->
-                            <option value="pendiente">Pendiente</option>
-                            <option value="revisado">Revisado</option>
+
+                    <!-- Estado -->
+                    <div class="mb-3">
+                        <label for="{{ form.estado.id_for_label }}" class="form-label">Estado:</label>
+                        <select name="{{ form.estado.name }}" id="{{ form.estado.id_for_label }}" class="form-select" required>
+                            <option value="" {% if not form.estado.value %}selected{% endif %} disabled>Selecciona un estado</option>
+                            {% for choice in sugerencia.ESTADO_CHOICES %}
+                                <option value="{{ choice.0 }}" {% if form.estado.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                            {% endfor %}
                         </select>
                     </div>
         

@@ -12,7 +12,7 @@
                 <img src="{% static 'img/5.jpg' %}" class="card-img-top mx-auto" alt="Quejas Image" style="max-width: 50%;">
                 <div class="card-body">
                     <h2 class="card-title">Quejas</h2>
-                    <form action="" method="post">
+                    <form action="{% url 'queja_create' %}" method="post">
                         {% csrf_token %}
                         <!-- Agrega aquí los campos del formulario para las quejas -->
                         <button type="submit" class="btn btn-primary">Enviar Queja</button>

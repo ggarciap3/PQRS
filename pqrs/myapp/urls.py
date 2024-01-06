@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, LoginFormView, transferir_datos, buscar_por_cedula, cargar_datos, base_admin, cerrar_sesion, sugerencia_create, registro
+from .views import home, LoginFormView, transferir_datos, buscar_por_cedula, cargar_datos, base_admin, cerrar_sesion, sugerencia_create, registro, queja_create
 
 urlpatterns = [
     path('', home, name='index'),
@@ -12,5 +12,7 @@ urlpatterns = [
     path('buscar-por-cedula/<str:cedula>/', buscar_por_cedula, name='buscar_por_cedula'),
     path('sugerencias/create/', sugerencia_create, name='sugerencia_create'),
 
+    path('quejas/create/', queja_create, name='queja_create'),
+    
 
 ]

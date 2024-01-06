@@ -19,25 +19,50 @@ class Sugerencia(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='sugerencias', null=True)
     fecha = models.DateField(default=date.today)
     RESPONSABLE_CHOICES = [
-        ('FARIAS', 'FARIAS'),
-        ('GGARCIA', 'GGARCIA'),
-        ('WMARUDENA', 'WMARUDENA'),
-        ('NANDALUZ', 'NANDALUZ'),
+        ('Comunicacion_cultura', 'Comunicación clima y cultura'),
+        ('Desarrollo_laboral', 'Desarrollo y relaciones laborales'),
+        ('Nomina_compensaciones', 'Nomina y compensaciones'),
+        ('Seguridad_salud_ambiente', 'Seguridad, salud y ambiente'),
+        ('Servicios_generales', 'Servicios generales'),
+        ('Campo', 'Campo'),
+        ('Fabrica', 'Fabrica'),
     ]
-    responsable = models.CharField(max_length=20, choices=RESPONSABLE_CHOICES)
+    responsable = models.CharField(max_length=50, choices=RESPONSABLE_CHOICES)
     descripcion = models.TextField()
     ESTADO_CHOICES = [
         ('pendiente', 'Pendiente'),
-        ('revisado', 'Revisado'),
+        ('en_revision', 'En revisión'),
+        ('resuelta', 'Resuelta'),
     ]
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
 
-    # def autocompletar_campos(self):
-    #     # Llenar los campos nombre y area basándote en el usuario asociado
-    #     if self.usuario:
-    #         self.nombre = self.usuario.nombre
-    #         self.area = self.usuario.area
-
-# @receiver(pre_save, sender=Sugerencia)
-# def pre_save_sugerencia(sender, instance, **kwargs):
-#     instance.autocompletar_campos()
+class Queja(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='quejas', null=True)
+    Qfecha = models.DateField(default=date.today)
+    RESPONSABLE_CHOICES = [
+        ('Comunicacion_cultura', 'Comunicación clima y cultura'),
+        ('Desarrollo_laboral', 'Desarrollo y relaciones laborales'),
+        ('Nomina_compensaciones', 'Nomina y compensaciones'),
+        ('Seguridad_salud_ambiente', 'Seguridad, salud y ambiente'),
+        ('Servicios_generales', 'Servicios generales'),
+        ('Campo', 'Campo'),
+        ('Fabrica', 'Fabrica'),
+    ]
+    Qresponsable = models.CharField(max_length=50, choices=RESPONSABLE_CHOICES) 
+    CAUSA_CHOICES = [
+        ('asistencia_tarde', 'Asistencia llegó tarde'),
+        ('no_reportado', 'No fue reportado'),
+        ('mal_reportado', 'Mal reportado'),
+        ('p_sindicales_atrasados', 'P. sindicales atrasados'),
+        ('descuentos_atrasados', 'Descuentos atrasados'),
+        ('valores_descuento_erroneos', 'Valores de descuento erróneos'),
+        ('descuentos_jubilados', 'Descuentos de jubilados'),
+    ]
+    Qcausa = models.CharField(max_length=30, choices=CAUSA_CHOICES)
+    
+    ESTADO_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('en_revision', 'En revisión'),
+        ('resuelta', 'Resuelta'),
+    ]
+    Qestado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
