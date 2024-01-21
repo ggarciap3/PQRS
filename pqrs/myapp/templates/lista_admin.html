@@ -1,0 +1,267 @@
+{% extends "base_admin.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-1">
+    <div class="row">
+        <!-- Informe Excel -->
+        <div class="col-md-6">
+            <div class="card card-custom-bg">
+                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                    <h2 class="card-title mb-0">Informe Excel</h2>
+                </div>
+                <div class="card-body">
+                    <form method="get" action="{% url 'informe_download' %}" class="mt-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="start_date" class="form-label">Fecha de inicio:</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="end_date" class="form-label">Fecha de fin:</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="submit" class="invisible">Generar Informe</label>
+                                <button type="submit" class="btn btn-primary w-100 mt-2">Generar Informe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Total de Datos -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                    <h2 class="card-title mb-0">Total de Datos</h2>
+                </div>
+                <table class="table">
+                    <tr>
+                        <td><i class="fas fa-clipboard-list fa-2x text-warning"></i></td>
+                        <td>Reclamos</td>
+                        <td>{{ total_reclamo }}</td>
+                 
+                        <td><i class="fas fa-clipboard-list fa-2x text-warning"></i></td>
+                        <td>Quejas</td>
+                        <td>{{ total_quejas }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-clipboard-list fa-2x text-warning"></i></td>
+                        <td>Sugerencias</td>
+                        <td>{{ total_sugerencia }}</td>
+                    
+                        <td><i class="fas fa-clipboard-list fa-2x text-warning"></i></td>
+                        <td>Peticiones</td>
+                        <td>{{ total_peticion }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>     
+    </div>
+</div>
+<div class="container-fluid px-3 pt-3">
+    <div class="row">
+        <!-- Tabla de Sugerencias -->
+        <div class="col-md-6">
+            <div class="card card-custom-bg">
+                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                    <h3 class="card-title">Tabla de Sugerencias</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                                <th>Responsable</th>
+                                <th>Descripción</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sugerencia in sugerencias %}
+                                <tr>
+                                    <td>{{ sugerencia.usuario.nombre }}</td>
+                                    <td>{{ sugerencia.fecha }}</td>
+                                    <td>{{ sugerencia.responsable }}</td>
+                                    <td>{{ sugerencia.descripcion }}</td>
+                                    <td>{{ sugerencia.estado }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- Paginación para Sugerencias -->
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if sugerencias.has_previous %}
+                                <a href="?page_sugerencias=1">&laquo; first</a>
+                                <a href="?page_sugerencias={{ sugerencias.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                                Página {{ sugerencias.number }} de {{ sugerencias.paginator.num_pages }}.
+                            </span>
+                            {% if sugerencias.has_next %}
+                                <a href="?page_sugerencias={{ sugerencias.next_page_number }}">next</a>
+                                <a href="?page_sugerencias={{ sugerencias.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <!-- Tabla de Quejas -->
+        <div class="col-md-6">
+            <div class="card card-custom-bg">
+                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                    <h3 class="card-title">Tabla de Quejas</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                                <th>Responsable</th>
+                                <th>Causa</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for queja in quejas %}
+                                <tr>
+                                    <td>{{ queja.usuario.nombre }}</td>
+                                    <td>{{ queja.Qfecha }}</td>
+                                    <td>{{ queja.Qresponsable }}</td>
+                                    <td>{{ queja.Qcausa }}</td>
+                                    <td>{{ queja.Qestado }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- Paginación para Quejas -->
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if quejas.has_previous %}
+                                <a href="?page_quejas=1">&laquo; first</a>
+                                <a href="?page_quejas={{ quejas.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                                Página {{ quejas.number }} de {{ quejas.paginator.num_pages }}.
+                            </span>
+                            {% if quejas.has_next %}
+                                <a href="?page_quejas={{ quejas.next_page_number }}">next</a>
+                                <a href="?page_quejas={{ quejas.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- Tabla de Peticiones -->
+        <div class="col-md-6">
+            <div class="card card-custom-bg">
+                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                    <h3 class="card-title">Tabla de Peticiones</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                                <th>Responsable</th>
+                                <th>Causa</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for peticion in peticiones %}
+                                <tr>
+                                    <td>{{ peticion.usuario.nombre }}</td>
+                                    <td>{{ peticion.Pfecha }}</td>
+                                    <td>{{ peticion.Presponsable }}</td>
+                                    <td>{{ peticion.Pcausa }}</td>
+                                    <td>{{ peticion.Pestado }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- Paginación para Peticiones -->
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if peticiones.has_previous %}
+                                <a href="?page_peticiones=1">&laquo; first</a>
+                                <a href="?page_peticiones={{ peticiones.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                                Página {{ peticiones.number }} de {{ peticiones.paginator.num_pages }}.
+                            </span>
+                            {% if peticiones.has_next %}
+                                <a href="?page_peticiones={{ peticiones.next_page_number }}">next</a>
+                                <a href="?page_peticiones={{ peticiones.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <!-- Tabla de Reclamos -->
+        <div class="col-md-6">
+            <div class="card card-custom-bg">
+                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                    <h3 class="card-title">Tabla de Reclamos</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                                <th>Responsable</th>
+                                <th>Causa</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reclamo in reclamos %}
+                                <tr>
+                                    <td>{{ reclamo.usuario.nombre }}</td>
+                                    <td>{{ reclamo.Rfecha }}</td>
+                                    <td>{{ reclamo.Rresponsable }}</td>
+                                    <td>{{ reclamo.Rcausa }}</td>
+                                    <td>{{ reclamo.Restado }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- Paginación para Reclamos -->
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if reclamos.has_previous %}
+                                <a href="?page_reclamos=1">&laquo; first</a>
+                                <a href="?page_reclamos={{ reclamos.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                                Página {{ reclamos.number }} de {{ reclamos.paginator.num_pages }}.
+                            </span>
+                            {% if reclamos.has_next %}
+                                <a href="?page_reclamos={{ reclamos.next_page_number }}">next</a>
+                                <a href="?page_reclamos={{ reclamos.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}

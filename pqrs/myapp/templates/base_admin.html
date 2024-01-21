@@ -17,7 +17,7 @@
     <!-- Navbar Light -->
 
 <nav
-class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3" style="background: linear-gradient(310deg,#2a0b46,#50218d);">
+class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3" style="background: linear-gradient(3deg,#1b678b,#32b36a);">
 <div class="container">
   <div class="dropdown ms-auto white">
     <button class="btn dropdown-toggle " type="button" data-bs-toggle="dropdown"
@@ -36,18 +36,17 @@ class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3" style="back
   
   <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
     <ul class="navbar-nav navbar-nav-hover mx-auto">
+    
       <li class="nav-item mx-2">
-        <a href="" class="list-group-item  second-text fw-bold ">
-          <i class="fa-brands fa-stack-overflow me-2"></i>Dashboard
-        </a>
-      </li>
-
-      <li class="nav-item mx-2">
-        <a href="" class="list-group-item   second-text fw-bold ">
+        <a href="{% url 'lista_admin' %}" class="list-group-item   second-text fw-bold ">
           <i class="fa-solid fa-layer-group me-2"></i>Listas 
         </a>   
       </li>
-
+      <li class="nav-item mx-2">
+        <a href="{% url 'informe' %}" class="list-group-item  second-text fw-bold ">
+          <i class="fa-brands fa-stack-overflow me-2"></i>Dashboard
+        </a>
+      </li>
       <li class="nav-item mx-2">
         <a href="" class="list-group-item  second-text fw-bold ">
           <i class="fa-brands fa-stack-overflow me-2"></i>Terminar procesos
@@ -73,9 +72,8 @@ class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3" style="back
             {% block content %}{% endblock %}
             
             {% block footer %}
-            
- <footer class="footern  pt-4 pb-2" style="background: linear-gradient(310deg,#15425a,#50218d)">
-           <!-- -------- START FOOTER 5 w/ DARK BACKGROUND ------- -->
+      <!-- -------- START FOOTER 5 w/ DARK BACKGROUND ------- -->      
+ <footer class="footern  pt-4 pb-2" style="background: linear-gradient(3deg,#1b678b,#32b36a);" >         
     <footer class="footer py-5 my-9 bg-gradient-dark position-relative overflow-hidden">
             <img src="https://appsrv1-147a1.kxcdn.com/soft-ui-design-pro-django-v1.0.4/img/shapes/waves-white.svg" alt="pattern-lines" class="position-absolute start-0 top-0 w-100 opacity-6">
             <div class="container position-relative z-index-1">

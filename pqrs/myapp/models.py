@@ -35,6 +35,11 @@ class Sugerencia(models.Model):
         ('resuelta', 'Resuelta'),
     ]
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
+    CORREO_CHOICES = [
+        ('arongarcia558@gmail.com', 'arongarcia558@gmail.com'),
+        ('ggarciap3@unemi.edu.ec', 'ggarciap3@unemi.edu.ec'),
+    ]
+    correo = models.CharField(max_length=254, choices=CORREO_CHOICES, verbose_name='Correo Electrónico', blank=True, null=True)
 
 class Queja(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='quejas', null=True)
@@ -66,6 +71,11 @@ class Queja(models.Model):
         ('resuelta', 'Resuelta'),
     ]
     Qestado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
+    CORREO_CHOICES = [
+        ('arongarcia558@gmail.com', 'arongarcia558@gmail.com'),
+        ('ggarciap3@unemi.edu.ec', 'ggarciap3@unemi.edu.ec'),
+    ]
+    correo = models.CharField(max_length=254, choices=CORREO_CHOICES, verbose_name='Correo Electrónico', blank=True, null=True)
 
 class Peticion(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='peticion', null=True)
@@ -94,6 +104,11 @@ class Peticion(models.Model):
         ('resuelta', 'Resuelta'),
     ]
     Pestado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
+    CORREO_CHOICES = [
+        ('arongarcia558@gmail.com', 'arongarcia558@gmail.com'),
+        ('ggarciap3@unemi.edu.ec', 'ggarciap3@unemi.edu.ec'),
+    ]
+    correo = models.CharField(max_length=254, choices=CORREO_CHOICES, verbose_name='Correo Electrónico', blank=True, null=True) 
 
 
 class Reclamo(models.Model):
@@ -124,3 +139,8 @@ class Reclamo(models.Model):
         ('resuelta', 'Resuelta'),
     ]
     Restado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
+    CORREO_CHOICES = [
+        ('arongarcia558@gmail.com', 'arongarcia558@gmail.com'),
+        ('ggarciap3@unemi.edu.ec', 'ggarciap3@unemi.edu.ec'),
+    ]
+    correo = models.CharField(max_length=254, choices=CORREO_CHOICES, verbose_name='Correo Electrónico', blank=True, null=True)

@@ -137,6 +137,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 
-LOGIN_REDIRECT_URL = 'base_admin'
+LOGIN_REDIRECT_URL = 'lista_admin'
 LOGIN_URL = '/'
 # si se tiene exito al loguearse
+
+# Backend de correo electrónico
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Configuración del servidor SMTP (en este caso, para Gmail)
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+# Credenciales de la cuenta de correo desde la cual enviarás los correos
+EMAIL_HOST_USER = 'tu_correo@gmail.com'
+EMAIL_HOST_PASSWORD = 'tu_contraseña'
