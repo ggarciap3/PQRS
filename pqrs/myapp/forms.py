@@ -4,7 +4,7 @@ from .models import Sugerencia, Queja, Peticion, Reclamo
 class SugerenciaForm(forms.ModelForm):
     class Meta:
         model = Sugerencia
-        fields = ['fecha', 'responsable', 'descripcion', 'estado', 'correo']
+        fields = ['fecha', 'responsable', 'causa', 'estado', 'correo']
 
     def clean_usuario(self):
         # Devuelve el valor del campo usuario aunque esté deshabilitado
@@ -13,7 +13,7 @@ class SugerenciaForm(forms.ModelForm):
 class QuejaForm(forms.ModelForm):
     class Meta:
         model = Queja
-        fields = ['Qfecha', 'Qresponsable', 'Qcausa', 'Qestado', 'correo']
+        fields = ['Qfecha', 'Qresponsable', 'causa', 'Qestado', 'correo']
 
     def clean_usuario(self):
         # Devuelve el valor del campo usuario aunque esté deshabilitado
@@ -22,7 +22,7 @@ class QuejaForm(forms.ModelForm):
 class PeticionForm(forms.ModelForm):
     class Meta:
         model = Peticion
-        fields = ['Pfecha', 'Presponsable', 'Pcausa', 'Pestado', 'correo']
+        fields = ['Pfecha', 'Presponsable', 'causa', 'Pestado', 'correo']
 
     def clean_usuario(self):
         # Devuelve el valor del campo usuario aunque esté deshabilitado
@@ -31,7 +31,7 @@ class PeticionForm(forms.ModelForm):
 class ReclamoForm(forms.ModelForm):
     class Meta:
         model = Reclamo
-        fields = ['Rfecha', 'Rresponsable', 'Rcausa', 'Restado', 'correo']
+        fields = ['Rfecha', 'Rresponsable', 'causa', 'Restado', 'correo']
 
     def clean_usuario(self):
         # Devuelve el valor del campo usuario aunque esté deshabilitado

@@ -28,7 +28,7 @@ class Sugerencia(models.Model):
         ('Fabrica', 'Fabrica'),
     ]
     responsable = models.CharField(max_length=50, choices=RESPONSABLE_CHOICES)
-    descripcion = models.TextField()
+    causa = models.TextField()
     ESTADO_CHOICES = [
         ('pendiente', 'Pendiente'),
         ('en_revision', 'En revisión'),
@@ -63,7 +63,7 @@ class Queja(models.Model):
         ('valores_descuento_erroneos', 'Valores de descuento erróneos'),
         ('descuentos_jubilados', 'Descuentos de jubilados'),
     ]
-    Qcausa = models.CharField(max_length=30, choices=CAUSA_CHOICES)
+    causa = models.CharField(max_length=30, choices=CAUSA_CHOICES)
     
     ESTADO_CHOICES = [
         ('pendiente', 'Pendiente'),
@@ -97,7 +97,7 @@ class Peticion(models.Model):
         ('valores_descuento_erroneos', 'Valores de descuento erróneos'),
         ('descuentos_jubilados', 'Descuentos de jubilados'),
     ]
-    Pcausa = models.CharField(max_length=30, choices=CAUSA_CHOICES)
+    causa = models.CharField(max_length=30, choices=CAUSA_CHOICES)
     
     ESTADO_CHOICES = [
         ('pendiente', 'Pendiente'),
@@ -131,7 +131,7 @@ class Reclamo(models.Model):
         ('valores_descuento_erroneos', 'Valores de descuento erróneos'),
         ('descuentos_jubilados', 'Descuentos de jubilados'),
     ]
-    Rcausa = models.CharField(max_length=30, choices=CAUSA_CHOICES)
+    causa = models.CharField(max_length=30, choices=CAUSA_CHOICES)
     
     ESTADO_CHOICES = [
         ('pendiente', 'Pendiente'),

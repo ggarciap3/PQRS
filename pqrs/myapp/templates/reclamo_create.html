@@ -56,11 +56,11 @@
 
                     <!-- Causa -->
                     <div class="mb-3">
-                        <label for="{{ form.Rcausa.id_for_label }}" class="form-label">Causa:</label>
-                        <select name="{{ form.Rcausa.name }}" id="{{ form.Rcausa.id_for_label }}" class="form-select" required>
+                        <label for="{{ form.causa.id_for_label }}" class="form-label">Causa:</label>
+                        <select name="{{ form.causa.name }}" id="{{ form.causa.id_for_label }}" class="form-select" required>
                             <option value="" {% if not form.Restado.value %}selected{% endif %} disabled>Selecciona una causa</option>
                             {% for choice in reclamo.CAUSA_CHOICES %}
-                                <option value="{{ choice.0 }}" {% if form.Rcausa.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                                <option value="{{ choice.0 }}" {% if form.causa.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
                             {% endfor %}
                         </select>
                     </div>

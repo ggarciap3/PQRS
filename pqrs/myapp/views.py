@@ -316,8 +316,8 @@ class InformeDownloadView(View):
 def enviar_correo_despues_de_guardar(sender, instance, **kwargs):
     mensaje = f"""Estimado equipo de Servicio al cliente,
 
-    Se ha registrado una nueva {instance._meta.verbose_name} a nombre del cliente {instance.usuario.nombre} con CI número {instance.usuario.cedula} con la descripción {instance.descripcion}. 
-    Para dar atención a la información registrada por el cliente, ingrese con sus credenciales a la página corporativa.
+    Se ha registrado una nueva {instance._meta.verbose_name} a nombre del colaborador {instance.usuario.nombre} con CI número {instance.usuario.cedula} con la causa o descripcion {instance.causa}. 
+    Para dar atención a la información registrada por el colaborador, ingrese con sus credenciales a la página corporativa.
 
     Wall-eat."""
     
