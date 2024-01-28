@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from datetime import date
+from django.utils import timezone
 
 class Usuario(models.Model):
     cedula = models.CharField(max_length=10, primary_key=True)
@@ -40,7 +41,7 @@ class Registro(models.Model):
         ('ggarciap3@unemi.edu.ec', 'ggarciap3@unemi.edu.ec'),
     ]
     correo = models.CharField(max_length=254, choices=CORREO_CHOICES, verbose_name='Correo Electrónico', blank=True, null=True)
-    
+    fecha_registro = models.DateTimeField(auto_now_add=True)
     class Meta:
         abstract = True
     

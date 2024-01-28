@@ -13,6 +13,10 @@ label {
   margin-bottom: 5px; /* Espacio inferior entre etiquetas */
 }
 
+.logo-pequeno {
+  width: 50px; /* Establece el ancho de la imagen */
+  height: auto; /* Mantén la proporción de aspecto */
+}
 .footern {
   background:linear-gradient(310deg,#2cb66f,#338BC1);
   margin-top: auto;

@@ -5,12 +5,138 @@
 
 {% block content %}
 <div class="container">
-    <div>
-        {{ plotly_html_barras|safe }}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="card-title">Sugerencias por Mes</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sugerencia in sugerencias_por_mes %}
+                            <tr>
+                                <td>{{ sugerencia.month|date:"F Y" }}</td>
+                                <td>{{ sugerencia.count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="card-title">Quejas por Mes</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for queja in quejas_por_mes %}
+                            <tr>
+                                <td>{{ queja.month|date:"F Y" }}</td>
+                                <td>{{ queja.count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-   
-    <div>
-        {{ plotly_html_responsables|safe }}
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="card-title">Peticiones por Mes</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for peticion in peticiones_por_mes %}
+                            <tr>
+                                <td>{{ peticion.month|date:"F Y" }}</td>
+                                <td>{{ peticion.count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="card-title">Reclamos por Mes</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reclamo in reclamos_por_mes %}
+                            <tr>
+                                <td>{{ reclamo.month|date:"F Y" }}</td>
+                                <td>{{ reclamo.count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="card-title">Gráfico de Barras</h2>
+                </div>
+                <div class="card-body">
+                    {{ plotly_html_barras|safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="card-title">Gráfico de Responsables</h2>
+                </div>
+                <div class="card-body">
+                    {{ plotly_html_responsables|safe }}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

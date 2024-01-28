@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from .views import home, LoginFormView, buscar_por_cedula, base_admin, cerrar_sesion, sugerencia_create, registro, queja_create, peticion_create, reclamo_create, lista_admin
-from .views import InformeDownloadView,update_admin,visualizar_procesos,dashboard
+from .views import InformeDownloadView,update_admin,visualizar_procesos,dashboard    
 urlpatterns = [
     path('', home, name='index'),
     path('login/', LoginFormView.as_view(), name='login'),

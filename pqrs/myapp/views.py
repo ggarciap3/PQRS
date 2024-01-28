@@ -25,6 +25,11 @@ import plotly.graph_objs as go
 from django.db.models import Count
 from .models import Sugerencia, Queja, Peticion, Reclamo
 
+from django.db.models.functions import TruncMonth
+from django.db.models import Count
+from datetime import datetime
+from django.contrib.auth.decorators import login_required
+
 def home(request):
     form = AuthenticationForm()
     return render(request, 'home.html', {'form': form})
@@ -167,6 +172,7 @@ def reclamo_create(request):
 
     return render(request, 'reclamo_create.html', {'form': form, 'reclamo': reclamo})
 
+@login_required
 def lista_admin(request):
     # Configura la cantidad de ítems por página
     items_por_pagina = 4
@@ -304,7 +310,8 @@ def enviar_correo_registro(correo, mensaje, verbose_name_plural):
     except Exception as e:
         # Maneja cualquier excepción que pueda ocurrir durante el envío del correo
         print(f"Error al enviar correo: {e}")
-        
+
+@login_required        
 def update_admin(request):
     sugerencias = Sugerencia.objects.all()
     quejas = Queja.objects.all()
@@ -326,6 +333,7 @@ def update_admin(request):
         'reclamos': reclamos
     })
 
+@login_required
 def editar_estado(request, modelo, pk):
     # Selecciona el modelo según el nombre proporcionado
     model_map = {
@@ -352,6 +360,7 @@ def editar_estado(request, modelo, pk):
 
     return render(request, 'editar_estado.html', {'objeto': objeto, 'modelo': modelo, 'is_sugerencia': is_sugerencia})
 
+@login_required
 def detalle_registro(request, modelo, pk):
     # Obtener el modelo según el nombre proporcionado
     model_map = {
@@ -368,6 +377,7 @@ def detalle_registro(request, modelo, pk):
     # Renderizar la plantilla y pasar el registro al contexto
     return render(request, 'detalle_registro.html', {'registro': registro})
 
+@login_required
 def detalle(request, modelo, pk):
     # Obtener el modelo según el nombre proporcionado
     model_map = {
@@ -384,6 +394,7 @@ def detalle(request, modelo, pk):
     # Renderizar la plantilla y pasar el registro al contexto
     return render(request, 'detalle.html', {'registro': registro})
 
+@login_required
 def visualizar_procesos(request):
     form = FiltroProcesosForm(request.GET)
 
@@ -423,12 +434,22 @@ def visualizar_procesos(request):
         'reclamos': reclamos,
     })
 
+@login_required
 def dashboard(request):
-    # Contar la cantidad de responsables para cada modelo
-    counts_sugerencias = Sugerencia.objects.values('responsable').annotate(count=Count('responsable'))
-    counts_quejas = Queja.objects.values('responsable').annotate(count=Count('responsable'))
-    counts_peticiones = Peticion.objects.values('responsable').annotate(count=Count('responsable'))
-    counts_reclamos = Reclamo.objects.values('responsable').annotate(count=Count('responsable'))
+    year = datetime.now().year
+    month = datetime.now().month
+
+    # Contar registros por mes para cada modelo
+    sugerencias_por_mes = Sugerencia.objects.annotate(month=TruncMonth('fecha_registro')).values('month').annotate(count=Count('id')).order_by('month')
+    quejas_por_mes = Queja.objects.annotate(month=TruncMonth('fecha_registro')).values('month').annotate(count=Count('id')).order_by('month')
+    peticiones_por_mes = Peticion.objects.annotate(month=TruncMonth('fecha_registro')).values('month').annotate(count=Count('id')).order_by('month')
+    reclamos_por_mes = Reclamo.objects.annotate(month=TruncMonth('fecha_registro')).values('month').annotate(count=Count('id')).order_by('month')
+
+    # Contar la cantidad de responsables para cada modelo por mes
+    counts_sugerencias = Sugerencia.objects.annotate(month=TruncMonth('fecha_registro')).values('month', 'responsable').annotate(count=Count('responsable'))
+    counts_quejas = Queja.objects.annotate(month=TruncMonth('fecha_registro')).values('month', 'responsable').annotate(count=Count('responsable'))
+    counts_peticiones = Peticion.objects.annotate(month=TruncMonth('fecha_registro')).values('month', 'responsable').annotate(count=Count('responsable'))
+    counts_reclamos = Reclamo.objects.annotate(month=TruncMonth('fecha_registro')).values('month', 'responsable').annotate(count=Count('responsable'))
 
     # Combinar los resultados de cada consulta
     counts_responsables = counts_sugerencias.union(counts_quejas, counts_peticiones, counts_reclamos)
@@ -444,30 +465,35 @@ def dashboard(request):
         'Fabrica': 'Fabrica'
     }
 
-    # Obtener los nombres de los responsables y las cantidades
+    # Obtener los nombres de los responsables y las cantidades por mes
     labels = [responsable_mapping[item['responsable']] for item in counts_responsables]
     values = [item['count'] for item in counts_responsables]
 
     # Crear el gráfico de pastel
     fig_pie = go.Figure(go.Pie(labels=labels, values=values))
-    fig_pie.update_layout(title='Registros por responsables')
+    fig_pie.update_layout(title='Registros por responsables por mes')
 
     # Convertir el gráfico de pastel a HTML
     plotly_html_pie = fig_pie.to_html(full_html=False)
 
-    # Contar la cantidad de cada tipo de registro
-    total_sugerencias = Sugerencia.objects.count()
-    total_quejas = Queja.objects.count()
-    total_peticiones = Peticion.objects.count()
-    total_reclamos = Reclamo.objects.count()
+    # Contar la cantidad de cada tipo de registro por mes
+    total_sugerencias = [item['count'] for item in sugerencias_por_mes]
+    total_quejas = [item['count'] for item in quejas_por_mes]
+    total_peticiones = [item['count'] for item in peticiones_por_mes]
+    total_reclamos = [item['count'] for item in reclamos_por_mes]
 
     # Preparar los datos para el gráfico de barras
+    meses = [item['month'] for item in sugerencias_por_mes]  # Se asume que los meses son iguales para todos los tipos de registro
     procesos = ['Sugerencias', 'Quejas', 'Peticiones', 'Reclamos']
     cantidades = [total_sugerencias, total_quejas, total_peticiones, total_reclamos]
 
     # Crear el gráfico de barras
-    fig_bar = go.Figure(go.Bar(x=procesos, y=cantidades))
-    fig_bar.update_layout(title='Cantidad de Sugerencias, Quejas, Peticiones y Reclamos', xaxis_title='Procesos', yaxis_title='Cantidad')
+    fig_bar = go.Figure()
+
+    for i, proceso in enumerate(procesos):
+        fig_bar.add_trace(go.Bar(x=meses, y=cantidades[i], name=proceso))
+
+    fig_bar.update_layout(title='Cantidad de Sugerencias, Quejas, Peticiones y Reclamos por Mes', xaxis_title='Mes', yaxis_title='Cantidad')
 
     # Convertir el gráfico de barras a HTML
     plotly_html_bar = fig_bar.to_html(full_html=False)
@@ -475,7 +501,11 @@ def dashboard(request):
     # Pasar los gráficos HTML al contexto
     contexto = {
         'plotly_html_responsables': plotly_html_pie,
-        'plotly_html_barras': plotly_html_bar
+        'plotly_html_barras': plotly_html_bar,
+        'sugerencias_por_mes': sugerencias_por_mes,
+        'quejas_por_mes': quejas_por_mes,
+        'peticiones_por_mes': peticiones_por_mes,
+        'reclamos_por_mes': reclamos_por_mes
     }
 
     return render(request, 'dashboard.html', contexto)
