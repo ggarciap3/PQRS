@@ -11,7 +11,7 @@
             <div class="card text-center">
                 <img src="{% static 'img/5.jpg' %}" class="card-img-top mx-auto" alt="Quejas Image" style="max-width: 50%;">
                 <div class="card-body">
-                    <h2 class="card-title">Quejas</h2>
+                    <h2 class="card-title"> Quejas &nbsp</h2>
                     <form action="{% url 'queja_create' %}" method="post">
                         {% csrf_token %}
                         <!-- Agrega aquí los campos del formulario para las quejas -->
@@ -41,7 +41,7 @@
             <div class="card text-center">
                 <img src="{% static 'img/3.png' %}" class="card-img-top mx-auto" alt="Sugerencias Image" style="max-width: 50%;">
                 <div class="card-body">
-                    <h2 class="card-title">Sugerencias</h2>
+                    <h2 class="card-title"> Sugerencias&nbsp</h2>
                     <form action="{% url 'sugerencia_create' %}" method="post">
                         {% csrf_token %}
                         <!-- Agrega aquí los campos del formulario para las sugerencias -->
