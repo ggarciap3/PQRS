@@ -1,15 +1,21 @@
-from django.core.management import call_command
 import json
-import subprocess
 
-# Cargar datos desde el archivo JSON
-with open('datos_temp.json', 'rb') as file:
-    # Usar el codec latin-1 en lugar de utf-8
-    data = file.read().decode('latin-1', errors='replace')
+def transferir_datos():
+    try:
+        # Abrir el archivo de datos_temp.json para lectura
+        with open('datos_temp.json', 'r', encoding='latin-1') as file:
+            data = json.load(file)
 
-# Crear un archivo temporal de fixture
-with open('temp_fixture.json', 'w', encoding='utf-8') as temp_file:
-    temp_file.write(data)
+        # Procesar los datos si es necesario
+        # Por ejemplo, aquí podrías realizar transformaciones o filtrar datos
+        
+        # Escribir los datos procesados en temp_fixture.json
+        with open('temp_fixture.json', 'w', encoding='utf-8') as temp_file:
+            json.dump(data, temp_file)
 
-# Llamar al comando loaddata con el archivo de fixture temporal
-subprocess.run(['python', 'manage.py', 'loaddata', '--database=default', 'temp_fixture.json'])
+        print("Transferencia de datos exitosa.")
+    except Exception as e:
+        print(f"Error durante la transferencia de datos: {e}")
+
+if __name__ == "__main__":
+    transferir_datos()

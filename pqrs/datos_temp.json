@@ -145,6 +145,54 @@
 },
 {
   "model": "myapp.usuario",
+  "pk": "1202586318",
+  "fields": {
+    "nombre": "Gavin Jose",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "1234567845",
+  "fields": {
+    "nombre": "Siiiii uuuuu",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "1245586318",
+  "fields": {
+    "nombre": "Gavin garcia",
+    "area": "0180 - RECURSOS HUMANOS",
+    "departamento": "0090 - GESTION TALENTO HUMANO",
+    "cargo": "ASISTENTE GESTION TALENTO HUMA",
+    "tipo_empleado": "EMPLEADOS MILAGRO",
+    "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "1547896325",
+  "fields": {
+    "nombre": "casa csa",
+    "area": "asddsadsa",
+    "departamento": "sdadsa",
+    "cargo": "saddsa",
+    "tipo_empleado": "sdasaddsa",
+    "tipo_contrato": "saddsadsa"
+  }
+},
+{
+  "model": "myapp.usuario",
   "pk": "4549345855",
   "fields": {
     "nombre": "JOSEUE EEEEE",
@@ -189,6 +237,42 @@
     "cargo": "ASISTENTE GESTION TALENTO HUMA",
     "tipo_empleado": "EMPLEADOS MILAGRO",
     "tipo_contrato": "I - INDEFINIDO"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "7845145621",
+  "fields": {
+    "nombre": "yuyuy",
+    "area": "iuyi",
+    "departamento": "iuhyiu",
+    "cargo": "hiuh",
+    "tipo_empleado": "igig",
+    "tipo_contrato": "gui"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "7845851245",
+  "fields": {
+    "nombre": "tytytytyty fjui",
+    "area": "iuhiu",
+    "departamento": "uhiu",
+    "cargo": "hhi",
+    "tipo_empleado": "hiu",
+    "tipo_contrato": "hiu"
+  }
+},
+{
+  "model": "myapp.usuario",
+  "pk": "7878745412",
+  "fields": {
+    "nombre": "yguyfrddduy hgug",
+    "area": "guyf",
+    "departamento": "iugiy",
+    "cargo": "iugyi",
+    "tipo_empleado": "yguyg",
+    "tipo_contrato": "iuiu"
   }
 },
 {

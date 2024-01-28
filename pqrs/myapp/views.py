@@ -46,28 +46,6 @@ def cerrar_sesion(request):
     logout(request)
     return redirect('/')
 
-def transferir_datos(request):
-    try:
-        # Aquí deberías colocar la lógica para transferir datos según tu aplicación
-        return HttpResponse("Transferencia de datos exitosa.")
-    except Exception as e:
-        return HttpResponse(f"Error durante la transferencia de datos: {e}")
-
-def cargar_datos(request):
-    try:
-        with open('datos_temp.json', 'rb') as file:
-            data = file.read().decode('latin-1', errors='replace')
-
-        with open('temp_fixture.json', 'w', encoding='utf-8') as temp_file:
-            temp_file.write(data)
-
-        # Lógica adicional para cargar datos en la base de datos si es necesario
-        # call_command('loaddata', '--database=default', 'temp_fixture.json')
-
-        return HttpResponse("Transferencia de datos exitosa.")
-    except Exception as e:
-        return HttpResponse(f"Error durante la transferencia de datos: {e}")
-
 def formulario_busqueda(request):
     if request.method == 'POST':
         cedula = request.POST.get('cedula', '')
@@ -359,7 +337,7 @@ def editar_estado(request, modelo, pk):
     model = model_map.get(modelo)
 
     # Obtén el objeto específico y prefetch relacionados si es necesario
-    objeto = get_object_or_404(model, pk=pk)
+    objeto = get_object_or_404(model, pk=pk) # type: ignore
     is_sugerencia = isinstance(objeto, Sugerencia)
     # Verifica si el método de solicitud es POST para procesar el formulario de edición
     if request.method == 'POST':
@@ -385,7 +363,7 @@ def detalle_registro(request, modelo, pk):
     model = model_map.get(modelo)
 
     # Obtener el registro específico
-    registro = get_object_or_404(model, pk=pk)
+    registro = get_object_or_404(model, pk=pk) # type: ignore
 
     # Renderizar la plantilla y pasar el registro al contexto
     return render(request, 'detalle_registro.html', {'registro': registro})
@@ -401,7 +379,7 @@ def detalle(request, modelo, pk):
     model = model_map.get(modelo)
 
     # Obtener el registro específico
-    registro = get_object_or_404(model, pk=pk)
+    registro = get_object_or_404(model, pk=pk) # type: ignore
 
     # Renderizar la plantilla y pasar el registro al contexto
     return render(request, 'detalle.html', {'registro': registro})
