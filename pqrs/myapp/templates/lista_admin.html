@@ -9,7 +9,7 @@
         <!-- Informe Excel -->
         <div class="col-md-6">
             <div class="card card-custom-bg">
-                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                <div class="card-header text-white" style="background: linear-gradient(210deg,#8499B1,#8499B1);">
                     <h2 class="card-title mb-0">Informe Excel</h2>
                 </div>
                 <div class="card-body">
@@ -35,7 +35,7 @@
         <!-- Total de Datos -->
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                <div class="card-header text-white" style="background: linear-gradient(210deg,#8499B1,#8499B1);">
                     <h2 class="card-title mb-0">Total de Datos</h2>
                 </div>
                 <table class="table">
@@ -67,32 +67,34 @@
         <!-- Tabla de Sugerencias -->
         <div class="col-md-6">
             <div class="card card-custom-bg">
-                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                <div class="card-header text-white" style="background: linear-gradient(210deg,#8499B1,#8499B1);">
                     <h3 class="card-title">Tabla de Sugerencias</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Fecha</th>
-                                <th>Responsable</th>
-                                <th>Descripción</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for sugerencia in sugerencias %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ sugerencia.usuario.nombre }}</td>
-                                    <td>{{ sugerencia.fecha }}</td>
-                                    <td>{{ sugerencia.responsable }}</td>
-                                    <td>{{ sugerencia.causa }}</td>
-                                    <td>{{ sugerencia.estado }}</td>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Responsable</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for sugerencia in sugerencias %}
+                                    <tr>
+                                        <td>{{ sugerencia.usuario.nombre }}</td>
+                                        <td>{{ sugerencia.fecha }}</td>
+                                        <td>{{ sugerencia.responsable }}</td>
+                                        <td>{{ sugerencia.causa }}</td>
+                                        <td>{{ sugerencia.estado }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- Paginación para Sugerencias -->
                     <div class="pagination">
                         <span class="step-links">
@@ -112,37 +114,37 @@
                 </div>
             </div>
         </div>
-        <br>
-        <br>
         <!-- Tabla de Quejas -->
         <div class="col-md-6">
             <div class="card card-custom-bg">
-                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                <div class="card-header text-white" style="background: linear-gradient(210deg,#8499B1,#8499B1);">
                     <h3 class="card-title">Tabla de Quejas</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Fecha</th>
-                                <th>Responsable</th>
-                                <th>Causa</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for queja in quejas %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ queja.usuario.nombre }}</td>
-                                    <td>{{ queja.fecha }}</td>
-                                    <td>{{ queja.responsable }}</td>
-                                    <td>{{ queja.causa }}</td>
-                                    <td>{{ queja.estado }}</td>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Responsable</th>
+                                    <th>Causa</th>
+                                    <th>Estado</th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for queja in quejas %}
+                                    <tr>
+                                        <td>{{ queja.usuario.nombre }}</td>
+                                        <td>{{ queja.fecha }}</td>
+                                        <td>{{ queja.responsable }}</td>
+                                        <td>{{ queja.causa }}</td>
+                                        <td>{{ queja.estado }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- Paginación para Quejas -->
                     <div class="pagination">
                         <span class="step-links">
@@ -162,37 +164,37 @@
                 </div>
             </div>
         </div>
-        <br>
         <!-- Tabla de Peticiones -->
         <div class="col-md-6">
-            <br>
             <div class="card card-custom-bg">
-                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                <div class="card-header text-white" style="background: linear-gradient(210deg,#8499B1,#8499B1);">
                     <h3 class="card-title">Tabla de Peticiones</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Fecha</th>
-                                <th>Responsable</th>
-                                <th>Causa</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for peticion in peticiones %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ peticion.usuario.nombre }}</td>
-                                    <td>{{ peticion.fecha }}</td>
-                                    <td>{{ peticion.responsable }}</td>
-                                    <td>{{ peticion.causa }}</td>
-                                    <td>{{ peticion.estado }}</td>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Responsable</th>
+                                    <th>Causa</th>
+                                    <th>Estado</th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for peticion in peticiones %}
+                                    <tr>
+                                        <td>{{ peticion.usuario.nombre }}</td>
+                                        <td>{{ peticion.fecha }}</td>
+                                        <td>{{ peticion.responsable }}</td>
+                                        <td>{{ peticion.causa }}</td>
+                                        <td>{{ peticion.estado }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- Paginación para Peticiones -->
                     <div class="pagination">
                         <span class="step-links">
@@ -212,38 +214,37 @@
                 </div>
             </div>
         </div>
-        <br>
-        <br>
         <!-- Tabla de Reclamos -->
         <div class="col-md-6">
-            <br>
             <div class="card card-custom-bg">
-                <div class="card-header text-white"style="background: linear-gradient(210deg,#8499B1,#8499B1);">
+                <div class="card-header text-white" style="background: linear-gradient(210deg,#8499B1,#8499B1);">
                     <h3 class="card-title">Tabla de Reclamos</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Fecha</th>
-                                <th>Responsable</th>
-                                <th>Causa</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for reclamo in reclamos %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ reclamo.usuario.nombre }}</td>
-                                    <td>{{ reclamo.fecha }}</td>
-                                    <td>{{ reclamo.responsable }}</td>
-                                    <td>{{ reclamo.causa }}</td>
-                                    <td>{{ reclamo.estado }}</td>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Responsable</th>
+                                    <th>Causa</th>
+                                    <th>Estado</th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for reclamo in reclamos %}
+                                    <tr>
+                                        <td>{{ reclamo.usuario.nombre }}</td>
+                                        <td>{{ reclamo.fecha }}</td>
+                                        <td>{{ reclamo.responsable }}</td>
+                                        <td>{{ reclamo.causa }}</td>
+                                        <td>{{ reclamo.estado }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- Paginación para Reclamos -->
                     <div class="pagination">
                         <span class="step-links">
@@ -265,5 +266,4 @@
         </div>
     </div>
 </div>
-<br>
 {% endblock %}

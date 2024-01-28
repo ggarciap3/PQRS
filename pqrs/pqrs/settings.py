@@ -25,9 +25,13 @@ SECRET_KEY = 'django-insecure-rs-xdb$@u&((8piu8b=%svo18&n0mn)y4%2lbzq1d&&+!x=d_%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.162']
+#ALLOWED_HOSTS = []
 
-
+# Application definition
+#python manage.py runserver 0.0.0.0:8000
+#http://192.168.0.162:8000/
+#Dirección IPv4.
 # Application definition
 
 INSTALLED_APPS = [
