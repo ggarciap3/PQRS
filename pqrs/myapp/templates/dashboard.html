@@ -1,0 +1,16 @@
+{% extends "base_admin.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div>
+        {{ plotly_html_barras|safe }}
+    </div>
+   
+    <div>
+        {{ plotly_html_responsables|safe }}
+    </div>
+</div>
+{% endblock %}

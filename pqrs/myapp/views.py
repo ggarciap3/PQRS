@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
 from .models import Usuario,Sugerencia,Queja,Peticion,Reclamo
-from .forms import SugerenciaForm,QuejaForm,PeticionForm,ReclamoForm
+from .forms import FiltroProcesosForm, SugerenciaForm,QuejaForm,PeticionForm,ReclamoForm
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Count
@@ -20,8 +20,10 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.utils.html import strip_tags
 import yagmail
-
-# from . import forms
+#graficos
+import plotly.graph_objs as go
+from django.db.models import Count
+from .models import Sugerencia, Queja, Peticion, Reclamo
 
 def home(request):
     form = AuthenticationForm()
@@ -73,14 +75,6 @@ def formulario_busqueda(request):
     else:
         return render(request, 'tu_template.html')
 
-def buscar_por_cedula(request, cedula):
-    try:
-        # Modifica esto según tu modelo y la lógica de búsqueda
-        usuario = get_object_or_404(User, username=cedula)
-        return HttpResponse(f"Nombre: {usuario.username}, Email: {usuario.email}")
-    except Http404:
-        return HttpResponse("Usuario no encontrado")
-
 def base_admin(request):
     return render(request, 'base_admin.html')  # Ajusta el nombre del template según tu estructura
 
@@ -88,22 +82,6 @@ def registro(request):
     form = AuthenticationForm()
     # Puedes pasar los formularios correspondientes como contexto
     return render(request, 'registro.html',{'form': form})
-
-def sugerencia_create(request):
-    sugerencia = Sugerencia()
-    if request.method == 'POST':
-        form = SugerenciaForm(request.POST)
-        if form.is_valid():
-            # Obtén el usuario en función de la cédula o cualquier otro identificador único
-            usuario = get_object_or_404(Usuario, cedula=request.POST.get('cedula'))
-            form.instance.usuario = usuario
-            form.save()
-            # Puedes redirigir a una página de éxito o a la lista de sugerencias
-            return redirect('registro')
-    else:
-        form = SugerenciaForm()
-
-    return render(request, 'sugerencia_create.html', {'form': form, 'sugerencia': sugerencia})
 
 def buscar_por_cedula(request, cedula):
     if request.method == 'GET':
@@ -129,7 +107,7 @@ def buscar_por_cedula(request, cedula):
                 usuario=usuario,
                 fecha=request.POST.get('fecha'),
                 responsable=request.POST.get('responsable'),
-                descripcion=request.POST.get('descripcion'),
+                causa=request.POST.get('causa'),
                 estado=request.POST.get('estado')
             )
 
@@ -141,7 +119,7 @@ def buscar_por_cedula(request, cedula):
                 'area_usuario': usuario.area,
                 'fecha': nueva_sugerencia.fecha,
                 'responsable': nueva_sugerencia.responsable,
-                'descripcion': nueva_sugerencia.descripcion,
+                'causa': nueva_sugerencia.causa,
                 'estado': nueva_sugerencia.estado,
                 # Agrega otros campos de Usuario y Sugerencia que desees incluir en la respuesta
             }
@@ -154,6 +132,20 @@ def buscar_por_cedula(request, cedula):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+def sugerencia_create(request):
+    sugerencia = Sugerencia()  # Crear una instancia de Sugerencia
+    if request.method == 'POST':
+        form = SugerenciaForm(request.POST)
+        if form.is_valid():
+            usuario = get_object_or_404(Usuario, cedula=request.POST.get('cedula'))
+            form.instance.usuario = usuario
+            form.save()
+            return redirect('registro')  # Redirigir a la página de registro
+    else:
+        form = SugerenciaForm()
+
+    return render(request, 'sugerencia_create.html', {'form': form, 'sugerencia': sugerencia})
 
 def queja_create(request):
     queja = Queja()
@@ -202,10 +194,10 @@ def lista_admin(request):
     items_por_pagina = 4
 
     # Obtiene los datos para cada tabla
-    sugerencias = Sugerencia.objects.all()
-    quejas = Queja.objects.all()
-    peticiones = Peticion.objects.all()
-    reclamos = Reclamo.objects.all()
+    sugerencias = Sugerencia.objects.all().order_by('-fecha')
+    quejas = Queja.objects.all().order_by('-fecha')
+    peticiones = Peticion.objects.all().order_by('-fecha')
+    reclamos = Reclamo.objects.all().order_by('-fecha')
 
     # Pagina los datos
     paginator_sugerencias = Paginator(sugerencias, items_por_pagina)
@@ -265,10 +257,6 @@ def lista_admin(request):
         'total_peticion': total_peticion,
     })
 
-class InformeFilterView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'informe_template.html')
-
 class InformeDownloadView(View):
     def get(self, request, *args, **kwargs):
         # Obtén las fechas de inicio y fin del rango seleccionado (asegúrate de obtenerlas de la solicitud del usuario)
@@ -277,9 +265,9 @@ class InformeDownloadView(View):
 
         # Filtra las sugerencias, quejas, peticiones y reclamos por rango de fecha
         sugerencias = Sugerencia.objects.filter(fecha__range=[start_date, end_date]).values()
-        quejas = Queja.objects.filter(Qfecha__range=[start_date, end_date]).values()
-        peticiones = Peticion.objects.filter(Pfecha__range=[start_date, end_date]).values()
-        reclamos = Reclamo.objects.filter(Rfecha__range=[start_date, end_date]).values()
+        quejas = Queja.objects.filter(fecha__range=[start_date, end_date]).values()
+        peticiones = Peticion.objects.filter(fecha__range=[start_date, end_date]).values()
+        reclamos = Reclamo.objects.filter(fecha__range=[start_date, end_date]).values()
 
         # Crea DataFrames de pandas con los datos
         df_sugerencias = pd.DataFrame(sugerencias)
@@ -338,3 +326,178 @@ def enviar_correo_registro(correo, mensaje, verbose_name_plural):
     except Exception as e:
         # Maneja cualquier excepción que pueda ocurrir durante el envío del correo
         print(f"Error al enviar correo: {e}")
+        
+def update_admin(request):
+    sugerencias = Sugerencia.objects.all()
+    quejas = Queja.objects.all()
+    peticiones = Peticion.objects.all()
+    reclamos = Reclamo.objects.all()
+
+    busqueda_usuario = request.GET.get("buscar_usuario")
+
+    if busqueda_usuario:
+        sugerencias = sugerencias.filter(usuario__nombre__icontains=busqueda_usuario)
+        quejas = quejas.filter(usuario__nombre__icontains=busqueda_usuario)
+        peticiones = peticiones.filter(usuario__nombre__icontains=busqueda_usuario)
+        reclamos = reclamos.filter(usuario__nombre__icontains=busqueda_usuario)
+
+    return render(request, 'update_admin.html', {
+        'sugerencias': sugerencias,
+        'quejas': quejas,
+        'peticiones': peticiones,
+        'reclamos': reclamos
+    })
+
+def editar_estado(request, modelo, pk):
+    # Selecciona el modelo según el nombre proporcionado
+    model_map = {
+        'Sugerencia': Sugerencia,
+        'Queja': Queja,
+        'Peticion': Peticion,
+        'Reclamo': Reclamo,
+    }
+    model = model_map.get(modelo)
+
+    # Obtén el objeto específico y prefetch relacionados si es necesario
+    objeto = get_object_or_404(model, pk=pk)
+    is_sugerencia = isinstance(objeto, Sugerencia)
+    # Verifica si el método de solicitud es POST para procesar el formulario de edición
+    if request.method == 'POST':
+        nuevo_estado = request.POST.get('nuevo_estado')
+        doc = request.FILES.get('doc')  # Obtén el archivo adjunto
+        objeto.estado = nuevo_estado
+        if doc:  # Si se adjuntó un archivo, guardarlo
+            objeto.doc = doc
+        objeto.save()
+        # Redirige a la vista update_admin después de la actualización
+        return redirect('update_admin')
+
+    return render(request, 'editar_estado.html', {'objeto': objeto, 'modelo': modelo, 'is_sugerencia': is_sugerencia})
+
+def detalle_registro(request, modelo, pk):
+    # Obtener el modelo según el nombre proporcionado
+    model_map = {
+        'Sugerencia': Sugerencia,
+        'Queja': Queja,
+        'Peticion': Peticion,
+        'Reclamo': Reclamo,
+    }
+    model = model_map.get(modelo)
+
+    # Obtener el registro específico
+    registro = get_object_or_404(model, pk=pk)
+
+    # Renderizar la plantilla y pasar el registro al contexto
+    return render(request, 'detalle_registro.html', {'registro': registro})
+
+def detalle(request, modelo, pk):
+    # Obtener el modelo según el nombre proporcionado
+    model_map = {
+        'Sugerencia': Sugerencia,
+        'Queja': Queja,
+        'Peticion': Peticion,
+        'Reclamo': Reclamo,
+    }
+    model = model_map.get(modelo)
+
+    # Obtener el registro específico
+    registro = get_object_or_404(model, pk=pk)
+
+    # Renderizar la plantilla y pasar el registro al contexto
+    return render(request, 'detalle.html', {'registro': registro})
+
+def visualizar_procesos(request):
+    form = FiltroProcesosForm(request.GET)
+
+    sugerencias = Sugerencia.objects.filter(estado='resuelta')
+    quejas = Queja.objects.filter(estado='resuelta')
+    peticiones = Peticion.objects.filter(estado='resuelta')
+    reclamos = Reclamo.objects.filter(estado='resuelta')
+
+    if form.is_valid():
+        cedula = form.cleaned_data.get('cedula')
+        responsable = form.cleaned_data.get('responsable')
+        tipo_proceso = form.cleaned_data.get('tipo_proceso')
+
+        if cedula:
+            sugerencias = sugerencias.filter(usuario__cedula=cedula)
+            quejas = quejas.filter(usuario__cedula=cedula)  
+            peticiones = peticiones.filter(usuario__cedula=cedula)
+            reclamos = reclamos.filter(usuario__cedula=cedula)
+        
+        if responsable:
+            sugerencias = sugerencias.filter(responsable=responsable)
+            quejas = quejas.filter(responsable=responsable)
+            peticiones = peticiones.filter(responsable=responsable)
+            reclamos = reclamos.filter(responsable=responsable)
+
+        if tipo_proceso:
+            sugerencias = sugerencias.filter(tipo_proceso=tipo_proceso)
+            quejas = quejas.filter(tipo_proceso=tipo_proceso)
+            peticiones = peticiones.filter(tipo_proceso=tipo_proceso)
+            reclamos = reclamos.filter(tipo_proceso=tipo_proceso)
+
+    return render(request, 'visualizar_procesos.html', {
+        'form': form,
+        'sugerencias': sugerencias,
+        'quejas': quejas,
+        'peticiones': peticiones,
+        'reclamos': reclamos,
+    })
+
+def dashboard(request):
+    # Contar la cantidad de responsables para cada modelo
+    counts_sugerencias = Sugerencia.objects.values('responsable').annotate(count=Count('responsable'))
+    counts_quejas = Queja.objects.values('responsable').annotate(count=Count('responsable'))
+    counts_peticiones = Peticion.objects.values('responsable').annotate(count=Count('responsable'))
+    counts_reclamos = Reclamo.objects.values('responsable').annotate(count=Count('responsable'))
+
+    # Combinar los resultados de cada consulta
+    counts_responsables = counts_sugerencias.union(counts_quejas, counts_peticiones, counts_reclamos)
+
+    # Mapear los valores de responsables
+    responsable_mapping = {
+        'Comunicacion_cultura': 'Comunicación clima y cultura',
+        'Desarrollo_laboral': 'Desarrollo y relaciones laborales',
+        'Nomina_compensaciones': 'Nomina y compensaciones',
+        'Seguridad_salud_ambiente': 'Seguridad, salud y ambiente',
+        'Servicios_generales': 'Servicios generales',
+        'Campo': 'Campo',
+        'Fabrica': 'Fabrica'
+    }
+
+    # Obtener los nombres de los responsables y las cantidades
+    labels = [responsable_mapping[item['responsable']] for item in counts_responsables]
+    values = [item['count'] for item in counts_responsables]
+
+    # Crear el gráfico de pastel
+    fig_pie = go.Figure(go.Pie(labels=labels, values=values))
+    fig_pie.update_layout(title='Registros por responsables')
+
+    # Convertir el gráfico de pastel a HTML
+    plotly_html_pie = fig_pie.to_html(full_html=False)
+
+    # Contar la cantidad de cada tipo de registro
+    total_sugerencias = Sugerencia.objects.count()
+    total_quejas = Queja.objects.count()
+    total_peticiones = Peticion.objects.count()
+    total_reclamos = Reclamo.objects.count()
+
+    # Preparar los datos para el gráfico de barras
+    procesos = ['Sugerencias', 'Quejas', 'Peticiones', 'Reclamos']
+    cantidades = [total_sugerencias, total_quejas, total_peticiones, total_reclamos]
+
+    # Crear el gráfico de barras
+    fig_bar = go.Figure(go.Bar(x=procesos, y=cantidades))
+    fig_bar.update_layout(title='Cantidad de Sugerencias, Quejas, Peticiones y Reclamos', xaxis_title='Procesos', yaxis_title='Cantidad')
+
+    # Convertir el gráfico de barras a HTML
+    plotly_html_bar = fig_bar.to_html(full_html=False)
+
+    # Pasar los gráficos HTML al contexto
+    contexto = {
+        'plotly_html_responsables': plotly_html_pie,
+        'plotly_html_barras': plotly_html_bar
+    }
+
+    return render(request, 'dashboard.html', contexto)

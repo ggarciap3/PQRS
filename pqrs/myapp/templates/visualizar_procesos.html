@@ -1,0 +1,125 @@
+{% extends "base_admin.html" %}
+{% load static %}
+
+{% block title %}Visualizar procesos terminados{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5">Lista de Procesos Terminados</h1>
+
+    <!-- Formulario de filtros -->
+    <style>
+       
+    </style>
+    
+    <div class="card-body">
+        <nav class="navbar bg-light">
+            <form method="GET" class="g-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="id_cedula" class="form-label">Cédula:</label>
+                        {{ form.cedula }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="id_responsable" class="form-label">Responsable:</label>
+                        {{ form.responsable }}
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="id_tipo_proceso" class="form-label">Tipo de Proceso:</label>
+                        {{ form.tipo_proceso }}
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block">Aplicar Filtros</button>
+                </div>
+            </form>
+        </nav>
+    </div>
+    <!-- Lista de procesos terminados -->
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for sugerencia in sugerencias %}
+        {% if sugerencia.estado == 'resuelta' %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Sugerencia</h5>
+                    <p class="card-text">Usuario: {{ sugerencia.usuario.nombre }}</p>
+                    <p class="card-text">Responsable: {{ sugerencia.responsable }}</p>
+                    <p class="card-text">Fecha: {{ sugerencia.fecha }}</p>
+                    <p class="card-text">Estado: {{ sugerencia.estado }}</p>
+                    <p class="card-text">Descripción: {{ sugerencia.causa }}</p>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'detalle' modelo='Sugerencia' pk=sugerencia.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for queja in quejas %}
+        {% if queja.estado == 'resuelta' %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Queja</h5>
+                    <p class="card-text">Usuario: {{ queja.usuario.nombre }}</p>
+                    <p class="card-text">Responsable: {{ queja.responsable }}</p>
+                    <p class="card-text">Fecha: {{ queja.fecha }}</p>
+                    <p class="card-text">Estado: {{ queja.estado }}</p>
+                    <p class="card-text">Descripción: {{ queja.causa }}</p>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'detalle' modelo='Queja' pk=queja.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for peticion in peticiones %}
+        {% if peticion.estado == 'resuelta' %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Petición</h5>
+                    <p class="card-text">Usuario: {{ peticion.usuario.nombre }}</p>
+                    <p class="card-text">Responsable: {{ peticion.responsable }}</p>
+                    <p class="card-text">Fecha: {{ peticion.fecha }}</p>
+                    <p class="card-text">Estado: {{ peticion.estado }}</p>
+                    <p class="card-text">Descripción: {{ peticion.causa }}</p>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'detalle' modelo='Peticion' pk=peticion.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for reclamo in reclamos %}
+        {% if reclamo.estado == 'resuelta' %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reclamo</h5>
+                    <p class="card-text">Usuario: {{ reclamo.usuario.nombre }}</p>
+                    <p class="card-text">Responsable: {{ reclamo.responsable }}</p>
+                    <p class="card-text">Fecha: {{ reclamo.fecha }}</p>
+                    <p class="card-text">Estado: {{ reclamo.estado }}</p>
+                    <p class="card-text">Descripción: {{ reclamo.causa }}</p>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'detalle' modelo='Reclamo' pk=reclamo.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

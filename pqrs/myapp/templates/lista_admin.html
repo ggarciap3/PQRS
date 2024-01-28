@@ -87,7 +87,7 @@
                                     <td>{{ sugerencia.usuario.nombre }}</td>
                                     <td>{{ sugerencia.fecha }}</td>
                                     <td>{{ sugerencia.responsable }}</td>
-                                    <td>{{ sugerencia.descripcion }}</td>
+                                    <td>{{ sugerencia.causa }}</td>
                                     <td>{{ sugerencia.estado }}</td>
                                 </tr>
                             {% endfor %}
@@ -135,10 +135,10 @@
                             {% for queja in quejas %}
                                 <tr>
                                     <td>{{ queja.usuario.nombre }}</td>
-                                    <td>{{ queja.Qfecha }}</td>
-                                    <td>{{ queja.Qresponsable }}</td>
-                                    <td>{{ queja.Qcausa }}</td>
-                                    <td>{{ queja.Qestado }}</td>
+                                    <td>{{ queja.fecha }}</td>
+                                    <td>{{ queja.responsable }}</td>
+                                    <td>{{ queja.causa }}</td>
+                                    <td>{{ queja.estado }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -185,10 +185,10 @@
                             {% for peticion in peticiones %}
                                 <tr>
                                     <td>{{ peticion.usuario.nombre }}</td>
-                                    <td>{{ peticion.Pfecha }}</td>
-                                    <td>{{ peticion.Presponsable }}</td>
-                                    <td>{{ peticion.Pcausa }}</td>
-                                    <td>{{ peticion.Pestado }}</td>
+                                    <td>{{ peticion.fecha }}</td>
+                                    <td>{{ peticion.responsable }}</td>
+                                    <td>{{ peticion.causa }}</td>
+                                    <td>{{ peticion.estado }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -236,10 +236,10 @@
                             {% for reclamo in reclamos %}
                                 <tr>
                                     <td>{{ reclamo.usuario.nombre }}</td>
-                                    <td>{{ reclamo.Rfecha }}</td>
-                                    <td>{{ reclamo.Rresponsable }}</td>
-                                    <td>{{ reclamo.Rcausa }}</td>
-                                    <td>{{ reclamo.Restado }}</td>
+                                    <td>{{ reclamo.fecha }}</td>
+                                    <td>{{ reclamo.responsable }}</td>
+                                    <td>{{ reclamo.causa }}</td>
+                                    <td>{{ reclamo.estado }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>

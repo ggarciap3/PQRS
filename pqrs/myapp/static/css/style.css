@@ -6,7 +6,12 @@ body, html {
   display: flex;
   flex-direction: column;
 }
-
+ /* Estilo para las etiquetas de formulario */
+label {
+  font-weight: bold; /* Hace que el texto de la etiqueta sea negrita */
+  color: #333; /* Color del texto */
+  margin-bottom: 5px; /* Espacio inferior entre etiquetas */
+}
 
 .footern {
   background:linear-gradient(310deg,#2cb66f,#338BC1);

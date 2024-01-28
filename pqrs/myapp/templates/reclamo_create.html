@@ -39,26 +39,26 @@
                     <legend>Ingreso un reclamo</legend>
                     <!-- Responsable -->
                     <div class="mb-3">
-                        <label for="{{ form.Rresponsable.id_for_label }}" class="form-label">Responsable:</label>
-                        <select name="{{ form.Rresponsable.name }}" id="{{ form.Rresponsable.id_for_label }}" class="form-select" required>
-                            <option value="" {% if not form.Rresponsable.value %}selected{% endif %} disabled>Selecciona una Área</option>
+                        <label for="{{ form.responsable.id_for_label }}" class="form-label">Responsable:</label>
+                        <select name="{{ form.responsable.name }}" id="{{ form.responsable.id_for_label }}" class="form-select" required>
+                            <option value="" {% if not form.responsable.value %}selected{% endif %} disabled>Selecciona una Área</option>
                             {% for choice in reclamo.RESPONSABLE_CHOICES %}
-                                <option value="{{ choice.0 }}" {% if form.Rresponsable.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                                <option value="{{ choice.0 }}" {% if form.responsable.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
                             {% endfor %}
                         </select>
                     </div>
 
                     <!-- Fecha -->
                     <div class="mb-3">
-                        <label for="{{ form.Rfecha.id_for_label }}" class="form-label">Fecha:</label>
-                        <input type="date" name="{{ form.Rfecha.name }}" id="{{ form.Rfecha.id_for_label }}" class="form-control" required value="{{ form.Rfecha.value }}">
+                        <label for="{{ form.fecha.id_for_label }}" class="form-label">Fecha:</label>
+                        <input type="date" name="{{ form.fecha.name }}" id="{{ form.fecha.id_for_label }}" class="form-control" required value="{{ form.fecha.value }}">
                     </div>
 
                     <!-- Causa -->
                     <div class="mb-3">
                         <label for="{{ form.causa.id_for_label }}" class="form-label">Causa:</label>
                         <select name="{{ form.causa.name }}" id="{{ form.causa.id_for_label }}" class="form-select" required>
-                            <option value="" {% if not form.Restado.value %}selected{% endif %} disabled>Selecciona una causa</option>
+                            <option value="" {% if not form.estado.value %}selected{% endif %} disabled>Selecciona una causa</option>
                             {% for choice in reclamo.CAUSA_CHOICES %}
                                 <option value="{{ choice.0 }}" {% if form.causa.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
                             {% endfor %}
@@ -76,11 +76,11 @@
                     </div>
                     <!-- Estado -->
                     <div class="mb-3">
-                        <label for="{{ form.Restado.id_for_label }}" class="form-label">Estado:</label>
-                        <select name="{{ form.Restado.name }}" id="{{ form.Restado.id_for_label }}" class="form-select" required>
-                            <option value="" {% if not form.Restado.value %}selected{% endif %} disabled>Selecciona un estado</option>
+                        <label for="{{ form.estado.id_for_label }}" class="form-label">Estado:</label>
+                        <select name="{{ form.estado.name }}" id="{{ form.estado.id_for_label }}" class="form-select" required>
+                            <option value="" {% if not form.estado.value %}selected{% endif %} disabled>Selecciona un estado</option>
                             {% for choice in reclamo.ESTADO_CHOICES %}
-                                <option value="{{ choice.0 }}" {% if form.Restado.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                                <option value="{{ choice.0 }}" {% if form.estado.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
                             {% endfor %}
                         </select>
                     </div>

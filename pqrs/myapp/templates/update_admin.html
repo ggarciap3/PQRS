@@ -1,0 +1,112 @@
+{% extends "base_admin.html" %}
+{% load static %}
+
+{% block title %}Terminar Proceso{% endblock %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="card-title">Lista de datos</h3>
+    </div>
+    <div class="card-body">
+        <nav class="navbar bg-light">
+            <div class="container-fluid">
+                <form class="d-flex" action="{% url 'update_admin' %}" method="GET">
+                    <input class="form-control me-2" placeholder="Buscar por Nombre ..."
+                    aria-label="Search" type="text" name="buscar_usuario">
+                    <button class="btn btn-outline-secondary" type="submit"><i
+                        class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Usuario</th>
+        <th>Responsable</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+  
+    {% for sugerencia in sugerencias %}
+      {% if sugerencia.estado == 'pendiente' or sugerencia.estado == 'en_revision' %}
+        <tr>
+          <td>Sugerencia</td>
+          <td>{{ sugerencia.usuario.nombre }}</td>
+          <td>{{ sugerencia.responsable }}</td>
+          <td>{{ sugerencia.fecha }}</td>
+          <td>{{ sugerencia.estado }}</td>
+          <td>{{ sugerencia.causa }}</td>
+          <td>
+            <a href="{% url 'detalle_registro' modelo='Sugerencia' pk=sugerencia.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+            <a href="{% url 'editar_estado' modelo='Sugerencia' pk=sugerencia.pk %}"  class="btn btn-success btn-sm"><i class="fas fa-pen"></i></a>
+          </td>
+        </tr> 
+      {% endif %}
+    {% endfor %}
+
+    {% for queja in quejas %}
+      {% if queja.estado == 'pendiente' or queja.estado == 'en_revision' %}
+        <tr>
+          <td>Queja</td>
+          <td>{{ queja.usuario.nombre }}</td>
+          <td>{{ queja.responsable }}</td>
+          <td>{{ queja.fecha }}</td>
+          <td>{{ queja.estado }}</td>
+          <td>{{ queja.causa }}</td>
+          <td>
+            <a href="{% url 'detalle_registro' modelo='Queja' pk=queja.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+            <a href="{% url 'editar_estado' modelo='Queja' pk=queja.pk %}" class="btn btn-success btn-sm"><i class="fas fa-pen"></i></a>
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% for peticion in peticiones %}
+      {% if peticion.estado == 'pendiente' or peticion.estado == 'en_revision' %}
+        <tr>
+          <td>Petición</td>
+          <td>{{ peticion.usuario.nombre }}</td>
+          <td>{{ peticion.responsable }}</td>
+          <td>{{ peticion.fecha }}</td>
+          <td>{{ peticion.estado }}</td>
+          <td>{{ peticion.causa }}</td>
+          <td>
+            <a href="{% url 'detalle_registro' modelo='Peticion' pk=peticion.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+            <a href="{% url 'editar_estado' modelo='Peticion' pk=peticion.pk %}" class="btn btn-success btn-sm"><i class="fas fa-pen"></i></a>
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% for reclamo in reclamos %}
+      {% if reclamo.estado == 'pendiente' or reclamo.estado == 'en_revision' %}
+        <tr>
+          <td>Reclamo</td>
+          <td>{{ reclamo.usuario.nombre }}</td>
+          <td>{{ reclamo.responsable }}</td>
+          <td>{{ reclamo.fecha }}</td>
+          <td>{{ reclamo.estado }}</td>
+          <td>{{ reclamo.causa }}</td>
+          <td>
+            <a href="{% url 'detalle_registro' modelo='Reclamo' pk=reclamo.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+            <a href="{% url 'editar_estado' modelo='Reclamo' pk=reclamo.pk %}" class="btn btn-success btn-sm"><i class="fas fa-pen"></i></a>
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+<br>
+{% endblock %}

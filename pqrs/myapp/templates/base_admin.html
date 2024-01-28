@@ -25,10 +25,10 @@ class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3" style="back
         <i class="fas fa-user me-2" style="color: white;"></i><span style="color: white;">{{ request.user.first_name }}</span>
     </button>
  <ul class="dropdown-menu white">
-        {% comment %} <li><a class="dropdown-item" href="{% url 'admin_dash' %}">Dashboard</a></li>
-        <li><a class="dropdown-item" href="{% url 'adminIngresopqs' %}">Listas </a></li>
-        <li><a class="dropdown-item" href="{% url 'subir_doc' %}">Terminar procesos</a></li>
-        <li><a class="dropdown-item" href="{% url 'adminTipospqs' %}">Categoria</a></li> {% endcomment %}
+        <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a class="dropdown-item" href="{% url 'lista_admin' %}">Listas </a></li>
+        <li><a class="dropdown-item" href="{% url 'update_admin' %}">Cambio de estado</a></li>
+        <li><a class="dropdown-item" href="{% url 'procesos_terminados' %}">Terminar procesos</a></li> 
         <li><a href="{% url 'cerrar_sesion' %}" class="dropdown-item">Logout</a></li>
     </ul> 
 </div>
@@ -43,19 +43,19 @@ class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3" style="back
         </a>   
       </li>
       <li class="nav-item mx-2">
-        <a href="{% url 'informe' %}" class="list-group-item  second-text fw-bold ">
+        <a href="{% url 'dashboard' %}" class="list-group-item  second-text fw-bold ">
           <i class="fa-brands fa-stack-overflow me-2"></i>Dashboard
         </a>
       </li>
       <li class="nav-item mx-2">
-        <a href="" class="list-group-item  second-text fw-bold ">
-          <i class="fa-brands fa-stack-overflow me-2"></i>Terminar procesos
+        <a href="{% url 'update_admin' %}" class="list-group-item  second-text fw-bold ">
+          <i class="fa-brands fa-stack-overflow me-2"></i>Cambio de estado
         </a>
       </li>
 
       <li class="nav-item mx-2">
-        <a href="" class="list-group-item  second-text fw-bold ">
-          <i class="fa-solid fa-bars-staggered me-2"></i>Categoria
+        <a href="{% url 'procesos_terminados' %}" class="list-group-item  second-text fw-bold ">
+          <i class="fa-solid fa-bars-staggered me-2"></i>Terminar procesos
         </a>
       </li>
 

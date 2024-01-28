@@ -1,0 +1,35 @@
+{% extends "base_admin.html" %}
+{% load static %}
+
+{% block title %}Detalle del Registro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5">Detalle del Registro</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">ID: {{ registro.id }}</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="card-text"><strong>Cédula:</strong> {{ registro.usuario.cedula }}</p>
+                    <p class="card-text"><strong>Nombre:</strong> {{ registro.usuario.nombre }}</p>
+                    <p class="card-text"><strong>Área:</strong> {{ registro.usuario.area }}</p>
+                    <p class="card-text"><strong>Fecha:</strong> {{ registro.fecha }}</p>
+                    <p class="card-text"><strong>Responsable:</strong> {{ registro.responsable }}</p>
+                    <p class="card-text"><strong>Causa:</strong> {{ registro.causa }}</p>
+                    <p class="card-text"><strong>Estado:</strong> {{ registro.estado }}</p>
+                    <p class="card-text"><strong>Correo Electrónico:</strong> {{ registro.correo }}</p>
+                </div>
+                <div class="col-md-6">
+                    {% if registro.doc %}
+                    <p class="card-text"><strong>Documento Adjunto:</strong> <a href="{{ registro.doc.url }}">{{ registro.doc.name }}</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-left mt-3">
+        <a href="{% url 'update_admin' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Regresar</a>
+    </div>
+</div>
+{% endblock %}

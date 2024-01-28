@@ -5,7 +5,7 @@ class UsuarioAdmin(admin.ModelAdmin):
     list_display = ['cedula', 'nombre', 'area', 'departamento', 'cargo', 'tipo_empleado', 'tipo_contrato']
 
 class SugerenciaAdmin(admin.ModelAdmin):
-    list_display = ['id','cedula','nombre', 'area', 'fecha','causa', 'responsable','estado', 'correo' ]
+    list_display = ['id','cedula','nombre', 'area', 'fecha','causa', 'responsable','estado', 'correo','tipo_proceso' ]
     
     def cedula(self, obj):
         return obj.usuario.cedula if obj.usuario else ""
@@ -20,7 +20,7 @@ class SugerenciaAdmin(admin.ModelAdmin):
     search_fields = ['usuario__cedula','usuario__nombre', 'usuario__area', 'descripcion']
 
 class QuejaAdmin(admin.ModelAdmin):
-    list_display = ['id','cedula','nombre', 'area', 'Qfecha', 'Qresponsable', 'causa', 'Qestado', 'correo' ]
+    list_display = ['id','cedula','nombre', 'area', 'fecha', 'responsable', 'causa', 'estado', 'correo','doc','tipo_proceso' ]
 
     def cedula(self, obj):
         return obj.usuario.cedula if obj.usuario else ""
@@ -35,7 +35,7 @@ class QuejaAdmin(admin.ModelAdmin):
     search_fields = ['usuario__cedula','usuario__nombre', 'usuario__area', 'descripcion']
 
 class PeticionAdmin(admin.ModelAdmin):
-    list_display = ['id','cedula','nombre', 'area', 'Pfecha', 'Presponsable', 'causa', 'Pestado', 'correo' ]
+    list_display = ['id','cedula','nombre', 'area', 'fecha', 'responsable', 'causa', 'estado', 'correo','doc','tipo_proceso' ]
 
     def cedula(self, obj):
         return obj.usuario.cedula if obj.usuario else ""
@@ -49,7 +49,7 @@ class PeticionAdmin(admin.ModelAdmin):
     search_fields = ['usuario__cedula','usuario__nombre', 'usuario__area', 'descripcion']
 
 class ReclamoAdmin(admin.ModelAdmin):
-    list_display = ['id','cedula','nombre', 'area', 'Rfecha', 'Rresponsable', 'causa', 'Restado', 'correo' ]
+    list_display = ['id','cedula','nombre', 'area', 'fecha', 'responsable', 'causa', 'estado', 'correo','doc','tipo_proceso' ]
 
     def cedula(self, obj):
         return obj.usuario.cedula if obj.usuario else ""
