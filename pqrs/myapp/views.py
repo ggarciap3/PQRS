@@ -259,6 +259,12 @@ class InformeDownloadView(View):
         df_peticiones = pd.DataFrame(peticiones)
         df_reclamos = pd.DataFrame(reclamos)
 
+        # Elimina el campo fecha_registro de los DataFrames
+        df_sugerencias.drop(columns=['fecha_registro'], inplace=True, errors='ignore')
+        df_quejas.drop(columns=['fecha_registro'], inplace=True, errors='ignore')
+        df_peticiones.drop(columns=['fecha_registro'], inplace=True, errors='ignore')
+        df_reclamos.drop(columns=['fecha_registro'], inplace=True, errors='ignore')
+
         # Crea un escritor Excel en memoria con pandas
         output = io.BytesIO()
         writer = pd.ExcelWriter(output, engine='openpyxl')
